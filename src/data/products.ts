@@ -44,7 +44,7 @@ export const products: Product[] = [
     ],
     compatibility: ['BMW', 'Mercedes-Benz', 'Audi', 'Tesla', 'Porsche', 'Toyota', 'Honda'],
     rating: 4.7,
-    reviewCount: 2190,
+    reviewCount: 2195,
     inStock: true,
     badge: '',
     url: "https://www.amazon.com/Detail-Guardz-Dirt-Bucket-Insert/dp/B07CKC4M9D?ref_=ast_sto_dp&th=1"
@@ -70,7 +70,7 @@ export const products: Product[] = [
     ],
     compatibility: ['All vehicle types', 'Boats', 'Motorcycles', 'RVs'],
     rating: 4.5,
-    reviewCount: 816,
+    reviewCount: 823,
     inStock: true,
     badge: '',
     url: "https://www.amazon.com/DETAIL-GUARDZ-Bucket-Filter-Washboard/dp/B09CRX2D31?ref_=ast_sto_dp&th=1"
@@ -164,7 +164,7 @@ export const products: Product[] = [
       '5-year warranty'
     ],
     compatibility: ['Universal - headlights and taillights'],
-    rating: 4.9,
+    rating: 3.9,
     reviewCount: 68,
     inStock: true,
     url: "https://www.amazon.com/Detail-Guardz-Washer-Attachment-Cleaner/dp/B07VGMKW7S?ref_=ast_sto_dp&th=1"
@@ -211,7 +211,7 @@ export const products: Product[] = [
     ],
     compatibility: ['Universal - headlights and taillights'],
     rating: 4.6,
-    reviewCount: 2775,
+    reviewCount: 2777,
     inStock: true,
     url: "https://www.amazon.com/DETAIL-GUARDZ-Hose-Guide-Motorcycles/dp/B0FHKTM2YW?ref_=ast_sto_dp&th=1"
   },

@@ -16,7 +16,7 @@ export default function FeaturedProducts() {
       name: "dirt Lock Car Wash Insert – Bucket Filter for 3–8 Gallon Round Pails – Traps Debris, Prevents Swirl Marks – Self-Locking Rubber Grips, Venturi Flow, Cleaning Tool ",
       price: 24.99,
       rating: 4.7,
-      reviews: 2190,
+      reviews: 2195,
       image: "https://m.media-amazon.com/images/I/71FKBeRc4cL._AC_SX679_.jpg",
       badge: "Premium",
       url: "https://www.amazon.com/Detail-Guardz-Dirt-Bucket-Insert/dp/B07CKC4M9D?ref_=ast_sto_dp&th=1"
@@ -25,8 +25,8 @@ export default function FeaturedProducts() {
       id: 2,
       name: "Dirt Lock Scrub Wall 180/360 – Washboard Attachment Dirt Lock - Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts",
       price: 20.99,
-      rating: 4.8,
-      reviews: 816,
+      rating: 4.5,
+      reviews: 823,
       image: "https://m.media-amazon.com/images/I/71PucAJR9iL._AC_SX466_.jpg",
       badge: "Premium",
       url: "https://www.amazon.com/DETAIL-GUARDZ-Bucket-Filter-Washboard/dp/B09CRX2D31?ref_=ast_sto_dp&th=1"
@@ -35,8 +35,8 @@ export default function FeaturedProducts() {
       id: 3,
       name: "The Dirt Lock Scrub and Pump Attachment for Car Wash Bucket Filter",
       price: 16.99,
-      rating: 4.9,
-      reviews: 235,
+      rating: 4.5,
+      reviews: 238,
       image: "https://m.media-amazon.com/images/I/71FXvGVXeHS._AC_SX466_.jpg",
       badge: "Premium",
       url: "https://www.amazon.com/DETAIL-GUARDZ-Attachment-Bucket-Filter/dp/B08FTK9PJJ?ref_=ast_sto_dp&th=1"
@@ -55,7 +55,7 @@ export default function FeaturedProducts() {
       id: 5,
       name: "Dirt Lock Pad Washer System Attachment with Spray Cleaner",
       price: 58.99,
-      rating: 4.7,
+      rating: 3.9,
       reviews: 68,
       image: "https://m.media-amazon.com/images/I/710cuaz8RzS._AC_SX466_.jpg",
       badge: "Popular",
@@ -65,7 +65,7 @@ export default function FeaturedProducts() {
       id: 6,
       name: "The Dirt Lock Pad Washer Bundle Complete Kit (Black) Includes Dirt Lock Bucket Filter",
       price: 49.99,
-      rating: 4.6,
+      rating: 3.9,
       reviews: 68,
       image: "https://m.media-amazon.com/images/I/61jDCK8t-1S._AC_SX466_.jpg",
       badge: "Premium",
@@ -75,8 +75,8 @@ export default function FeaturedProducts() {
       id: 7,
       name: "Hose Guide – 4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires ",
       price: 19.99,
-      rating: 4.8,
-      reviews: 2775,
+      rating: 4.6,
+      reviews: 2777,
       image: "https://m.media-amazon.com/images/I/61wf9wewH5L._AC_SX466_.jpg",
       badge: "Premium",
       url: "https://www.amazon.com/DETAIL-GUARDZ-Hose-Guide-Motorcycles/dp/B0FHKTM2YW?ref_=ast_sto_dp&th=1"
@@ -245,6 +245,42 @@ export default function FeaturedProducts() {
                       <h3 className="text-sm md:text-sm font-bold text-gray-900 mb-2 md:mb-3 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
                         {product.name}
                       </h3>
+
+                      <div className="flex items-center gap-1 mb-2 md:mb-3">
+                        {[...Array(5)].map((_, i) => {
+                          const rating = Math.round(product.rating * 2) / 2;
+
+                          if (i + 1 <= Math.floor(rating)) {
+                            return (
+                              <Star
+                                key={i}
+                                className="w-4 h-4 fill-blue-600 text-blue-600"
+                              />
+                            );
+                          }
+
+                          if (i < rating && i + 1 > rating) {
+                            return (
+                              <div key={i} className="relative w-4 h-4">
+                                <Star className="w-4 h-4 text-gray-300" />
+                                <div
+                                  className="absolute inset-0 overflow-hidden"
+                                  style={{ width: "50%" }}
+                                >
+                                  <Star className="w-4 h-4 fill-blue-600 text-blue-600" />
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <Star
+                              key={i}
+                              className="w-4 h-4 text-gray-300"
+                            />
+                          );
+                        })}
+                      </div>
 
                       <p className="text-xl md:text-2xl font-bold text-blue-600 mb-3 md:mb-4">
                         {formatPrice(product.price)}

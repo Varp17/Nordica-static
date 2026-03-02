@@ -78,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             Buy Now
           </Button>
           <p className="text-[10px] text-red-500 selection:text-center text-muted-foreground mt-2 opacity-90 leading-tight">
-            You'll be redirected to Amazon until 
+            You'll be redirected to Amazon until
             our checkout Cart is ready to use
           </p>
         </div>
@@ -108,40 +108,67 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Rating */}
         <div className="flex items-center gap-1">
           <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-2 w-3 ${i < Math.floor(product.rating)
-                  ? 'fill-accent text-accent'
-                  : 'text-muted-foreground/30'
-                  }`}
-              />
-            ))}
-            
+            {[...Array(5)].map((_, i) => {
+              const rating = Math.round(product.rating * 2) / 2;
+
+              if (i + 1 <= Math.floor(rating)) {
+                return (
+                  <Star
+                    key={i}
+                    className="h-4 w-4 fill-blue-600 text-blue-600"
+                  />
+                );
+              }
+
+              if (i < rating && i + 1 > rating) {
+                return (
+                  <div key={i} className="relative h-4 w-4">
+                    <Star className="h-4 w-4 text-muted-foreground/30" />
+                    <div
+                      className="absolute inset-0 overflow-hidden"
+                      style={{ width: "50%" }}
+                    >
+                      <Star className="h-4 w-4 fill-blue-600 text-blue-600" />
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <Star
+                  key={i}
+                  className="h-4 w-4 text-muted-foreground/30"
+                />
+              );
+            })}
           </div>
+
           <span className="text-xs text-muted-foreground">
             ({product.reviewCount})
           </span>
-          <span className='text-red-500 text-xs'>Rating as per amazon.com</span>
+
+          <span className="text-red-500 text-xs">
+            Rating as per amazon.com
+          </span>
         </div>
 
         {/* Spacer to push price to bottom */}
         <div className="flex-grow"></div>
 
         {/* Price */}
-{product.price != null && (
-  <div className="flex items-center gap-2">
-    <span className="text-base font-bold text-foreground">
-      {formatPrice(product.price)}
-    </span>
+        {product.price != null && (
+          <div className="flex items-center gap-2">
+            <span className="text-base font-bold text-foreground">
+              {formatPrice(product.price)}
+            </span>
 
-    {product.originalPrice != null && (
-      <span className="text-sm text-muted-foreground line-through">
-        {formatPrice(product.originalPrice)}
-      </span>
-    )}
-  </div>
-)}
+            {product.originalPrice != null && (
+              <span className="text-sm text-muted-foreground line-through">
+                {formatPrice(product.originalPrice)}
+              </span>
+            )}
+          </div>
+        )}
       </div>
     </div>
 
