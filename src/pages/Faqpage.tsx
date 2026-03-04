@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, Package, CreditCard, Truck, RefreshCw, Shield, HelpCircle, MessageCircle, Mail } from "lucide-react";
+import Layout from "@/components/layout/Layout";
 
 const faqCategories = [
   {
@@ -197,147 +198,149 @@ export function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="bg-secondary py-12 lg:py-16">
-        <div className="container-wide">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Find answers to common questions about our products, shipping, returns, and more.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Categories */}
-      <section className="py-16 lg:py-24">
-        <div className="container-wide max-w-5xl">
-          <div className="space-y-12">
-            {faqCategories.map((category, categoryIndex) => (
-              <div key={category.title} className="scroll-mt-24">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <category.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-                    {category.title}
-                  </h2>
-                </div>
-                <div className="space-y-3">
-                  {category.questions.map((item, questionIndex) => (
-                    <FAQItem
-                      key={questionIndex}
-                      question={item.question}
-                      answer={item.answer}
-                      isOpen={openItems[`${categoryIndex}-${questionIndex}`]}
-                      onClick={() => toggleItem(categoryIndex, questionIndex)}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Still Have Questions Section */}
-      <section className="py-16 lg:py-24 bg-secondary">
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Still Have Questions?
-              </h2>
+    <Layout>
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className="bg-secondary py-12 lg:py-16">
+          <div className="container-wide">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                Frequently Asked Questions
+              </h1>
               <p className="text-muted-foreground text-lg">
-                Can't find what you're looking for? Our customer service team is here to help.
+                Find answers to common questions about our products, shipping, returns, and more.
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
-                <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <Mail className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
+        {/* FAQ Categories */}
+        <section className="py-16 lg:py-24">
+          <div className="container-wide max-w-5xl">
+            <div className="space-y-12">
+              {faqCategories.map((category, categoryIndex) => (
+                <div key={category.title} className="scroll-mt-24">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <category.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+                      {category.title}
+                    </h2>
+                  </div>
+                  <div className="space-y-3">
+                    {category.questions.map((item, questionIndex) => (
+                      <FAQItem
+                        key={questionIndex}
+                        question={item.question}
+                        answer={item.answer}
+                        isOpen={openItems[`${categoryIndex}-${questionIndex}`]}
+                        onClick={() => toggleItem(categoryIndex, questionIndex)}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Email Support
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Get detailed answers to your questions. We typically respond within 24 hours.
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Still Have Questions Section */}
+        <section className="py-16 lg:py-24 bg-secondary">
+          <div className="container-wide">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                  Still Have Questions?
+                </h2>
+                <p className="text-muted-foreground text-lg">
+                  Can't find what you're looking for? Our customer service team is here to help.
                 </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
+                  <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <Mail className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    Email Support
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Get detailed answers to your questions. We typically respond within 24 hours.
+                  </p>
+                  <a
+                    href="mailto:support@detailguardz.com"
+                    className="text-primary font-medium hover:underline inline-flex items-center gap-2"
+                  >
+                    support@detailguardz.com
+                    <span>→</span>
+                  </a>
+                </div>
+
+                <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
+                  <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <MessageCircle className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    Live Chat
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Chat with us in real-time for immediate assistance during business hours.
+                  </p>
+                  <button className="text-primary font-medium hover:underline inline-flex items-center gap-2">
+                    Start a conversation
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-8 text-center">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Business Hours:</strong> Monday - Friday: 9 AM - 6 PM EST | Saturday: 10 AM - 4 PM EST
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Links Section */}
+        <section className="py-12 lg:py-16">
+          <div className="container-wide">
+            <div className="bg-primary/5 rounded-xl p-8 border border-primary/20">
+              <h3 className="text-xl font-bold text-foreground mb-6 text-center">
+                Helpful Resources
+              </h3>
+              <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="mailto:support@detailguardz.com"
-                  className="text-primary font-medium hover:underline inline-flex items-center gap-2"
+                  href="/shipping-returns"
+                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
                 >
-                  support@detailguardz.com
-                  <span>→</span>
+                  Shipping & Returns
+                </a>
+                <a
+                  href="/terms"
+                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
+                >
+                  Terms of Service
+                </a>
+                <a
+                  href="/privacy"
+                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
+                >
+                  Privacy Policy
+                </a>
+                <a
+                  href="/contact"
+                  className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Contact Us
                 </a>
               </div>
-
-              <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
-                <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <MessageCircle className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Live Chat
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Chat with us in real-time for immediate assistance during business hours.
-                </p>
-                <button className="text-primary font-medium hover:underline inline-flex items-center gap-2">
-                  Start a conversation
-                  <span>→</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-muted-foreground">
-                <strong>Business Hours:</strong> Monday - Friday: 9 AM - 6 PM EST | Saturday: 10 AM - 4 PM EST
-              </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Quick Links Section */}
-      <section className="py-12 lg:py-16">
-        <div className="container-wide">
-          <div className="bg-primary/5 rounded-xl p-8 border border-primary/20">
-            <h3 className="text-xl font-bold text-foreground mb-6 text-center">
-              Helpful Resources
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="/shipping-returns"
-                className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
-              >
-                Shipping & Returns
-              </a>
-              <a
-                href="/terms"
-                className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="/privacy"
-                className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/contact"
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-              >
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Layout>
   );
 }

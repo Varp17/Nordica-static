@@ -7,6 +7,7 @@ import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CtaSection } from "@/components/home/CtaSection";
 import { Helmet } from "react-helmet";
 import FeaturesProducts from "@/components/home/FeaturedProducts";
+import { HomeProductListing } from "@/components/home/HomeProductListing";
 
 const Index = () => {
   return (
@@ -27,6 +28,7 @@ const Index = () => {
           <HeroSection />
           {/* <CategoriesSection /> */}
           <FeaturesProducts />
+          <HomeProductListing />
           <FeaturesSection />
           {/* <TestimonialsSection /> */}
           <CtaSection />

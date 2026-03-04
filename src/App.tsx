@@ -17,34 +17,36 @@ import { Scroll } from "lucide-react";
 import ScrolltoTop from "./components/ScrolltoTop";
 import { ShippingReturnsPage } from "./pages/shiping-returns";
 import { FAQPage } from "./pages/Faqpage";
+import Media from "./pages/Media";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-      <CurrencyProvider>
+    <CurrencyProvider>
       <CartProvider>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-      <ScrolltoTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/where-to-buy" element={<WhereToBuy />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/shipping" element={<ShippingReturnsPage/>}/>
-          <Route path="/faq" element={<FAQPage/>}/>
-          <Route path="*" element={<NotFound />} />
-          
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-    </CartProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrolltoTop />
+            <Routes>
+              <Route path="/" element={<Index />} />
+
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/where-to-buy" element={<WhereToBuy />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/media" element={<Media />} />
+              <Route path="/shipping" element={<ShippingReturnsPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="*" element={<NotFound />} />
+
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </CartProvider>
     </CurrencyProvider>
   </QueryClientProvider>
 );

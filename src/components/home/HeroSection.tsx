@@ -6,7 +6,7 @@ import { BannerCarousel } from "@/components/home/addcoroseul";
 import { MarqueeBar } from "@/components/home/marquee";
 import { useEffect, useState, useRef } from "react";
 import BG from "@/assets/new_bg.png"
-import BG_MOBILE from "@/assets/newbg_mobile.png"
+import BG_MOBILE from "@/assets/new_bg_mobile.jpg"
 
 
 export function HeroSection() {

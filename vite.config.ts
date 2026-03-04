@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8007,
-    allowedHosts: ['www.detailguardz.com', 'detailguardz','detailguardz.com']
+    allowedHosts: ['www.detailguardz.com', 'detailguardz', 'detailguardz.com']
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

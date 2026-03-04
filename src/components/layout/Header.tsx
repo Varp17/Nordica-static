@@ -16,6 +16,7 @@ import LOGO from "@/assets/logo.png"
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'Shop', href: '/products' },
+  { name: 'Media', href: '/media' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -49,7 +50,7 @@ export const Header = () => {
           <Link to="/" className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="flex items-center">
-                <img src={LOGO} alt="" className='object-contain h-12 w-20 lg:h-16 lg:w-20' />
+                <img src={LOGO} alt="" className='object-contain h-16 w-32 lg:h-20 lg:w-40' />
               </div>
             </div>
           </Link>

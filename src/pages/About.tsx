@@ -155,7 +155,7 @@ const About = () => {
                 Browse our collection and discover why thousands of Canadians trust Detail Guardz.
               </p>
               <Button variant="hero" size="lg" asChild>
-                <Link to="/shop">
+                <Link to="/products">
                   Shop Now
                   <ArrowRight className="w-5 h-5 ml-1" />
                 </Link>

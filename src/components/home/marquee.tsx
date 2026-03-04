@@ -3,7 +3,7 @@ import { Truck, Tag, Gift, Zap, ShieldCheck, Sparkles } from "lucide-react";
 export function MarqueeBar() {
   const announcements = [
     { icon: ShieldCheck, text: "100% Quality Guaranteed" },
-    { icon: Zap, text: "Fast 24h Processing" },
+    { icon: Zap, text: "Fast order processing" },
 
     { icon: Sparkles, text: "Premium Products ", highlight: true },
 
