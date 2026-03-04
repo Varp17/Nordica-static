@@ -105,7 +105,7 @@ export default function FeaturedProducts() {
 
   const getItemsPerPage = () => {
     if (typeof window !== 'undefined') {
-      if (window.innerWidth < 768) return 1;
+      if (window.innerWidth < 768) return 2;
       if (window.innerWidth < 1024) return 2;
       return 3;
     }
@@ -242,7 +242,7 @@ export default function FeaturedProducts() {
                     <div className="p-4 md:p-6">
 
 
-                      <h3 className="text-sm md:text-sm font-bold text-gray-900 mb-2 md:mb-3 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
+                      <h3 className="text-[10px] sm:text-sm font-bold text-gray-900 mb-2 md:mb-3 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
                         {product.name}
                       </h3>
 

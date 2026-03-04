@@ -30,9 +30,11 @@ export function HomeProductListing() {
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                     {displayProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <div key={product.id} className="scale-100 hover:scale-[1.02] transition-transform">
+                            <ProductCard product={product} />
+                        </div>
                     ))}
                 </div>
 

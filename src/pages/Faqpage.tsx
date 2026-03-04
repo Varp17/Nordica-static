@@ -203,11 +203,11 @@ export function FAQPage() {
         {/* Hero Section */}
         <section className="bg-secondary py-12 lg:py-16">
           <div className="container-wide">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <div className="text-center max-w-3xl mx-auto px-4">
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
                 Frequently Asked Questions
               </h1>
-              <p className="text-muted-foreground text-lg">
+              <p className="text-muted-foreground text-base sm:text-lg">
                 Find answers to common questions about our products, shipping, returns, and more.
               </p>
             </div>
@@ -224,7 +224,7 @@ export function FAQPage() {
                     <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                       <category.icon className="h-6 w-6 text-primary" />
                     </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    <h2 className="text-xl lg:text-3xl font-bold text-foreground">
                       {category.title}
                     </h2>
                   </div>

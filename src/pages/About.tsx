@@ -60,15 +60,15 @@ const About = () => {
               {/* Main content - Centered */}
               <div className="max-w-4xl mx-auto text-center">
                 {/* Heading */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight">
                   Passionate About Cars.
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 mt-2">
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 mt-1">
                     Obsessed With Quality.
                   </span>
                 </h1>
 
                 {/* Description */}
-                <p className="text-lg sm:text-xl text-slate-200 leading-relaxed mb-12 max-w-2xl mx-auto">
+                <p className="text-base sm:text-xl text-slate-200/90 leading-relaxed mb-8 max-w-2xl mx-auto">
                   Detail Guardz was born from a simple idea: every car enthusiast deserves access to professional-grade detailing products without the professional price tag.
                 </p>
 
@@ -83,7 +83,7 @@ const About = () => {
                 {/* Left Column - Story Content (spans 2 rows) */}
                 <div className="lg:row-span-2 flex flex-col h-full">
                   <div>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-8 leading-tight">Our Story</h2>
+                    <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">Our Story</h2>
                     <div className="space-y-6 text-base lg:text-lg text-muted-foreground leading-relaxed">
                       <p className="text-justify">
                         The story of Detail Guardz began over 30 years ago when Carmine Santarelli, founder of Nordica Plastics Ltd, invented a small automotive detailing tool designed to aid the public in cleaning their cars. That product, "Hose-eez", would later go on to become known as the "Detail Guardz Hose Guide" which was relaunched in 2017.
@@ -126,7 +126,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {[
                   { icon: Award, title: "Quality First", description: "We only sell products we'd use on our own cars." },
                   { icon: Users, title: "Community", description: "We're building a community of passionate detailers." },

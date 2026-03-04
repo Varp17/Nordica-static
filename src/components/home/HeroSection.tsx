@@ -63,12 +63,12 @@ to-black/10
                 <span className="text-sm font-medium text-white">Premium Car Care Products</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 opacity-0 animate-fade-up animation-delay-100">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 opacity-0 animate-fade-up animation-delay-100">
                 Professional Detailing
-                <h2 className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 leading-tight">Made Simple</h2>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 leading-tight">Made Simple</span>
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-white mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-0 animate-fade-up animation-delay-200 ">
+              <p className="text-base sm:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed opacity-0 animate-fade-up animation-delay-200">
                 Premium car wash and detailing gear shipped directly to your door across North America. Achieve showroom results from your own driveway.
               </p>
               {/* Desktop CTAs - Hidden on mobile */}

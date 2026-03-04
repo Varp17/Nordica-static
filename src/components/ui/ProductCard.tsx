@@ -77,25 +77,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <ShoppingCart className="h-4 w-4 mr-2" />
             Buy Now
           </Button>
-          <p className="text-[10px] text-red-500 selection:text-center text-muted-foreground mt-2 opacity-90 leading-tight">
-            You'll be redirected to Amazon until
-            our checkout Cart is ready to use
+          <p className="text-[10px] text-red-500 text-center mt-1.5 sm:mt-2 opacity-90 leading-tight">
+            <span className="sm:hidden">Redirects to Amazon</span>
+            <span className="hidden sm:inline">Redirecting to Amazon checkout</span>
           </p>
         </div>
 
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-1 overflow-visible flex-grow flex flex-col">
-        <p className="text-xs text-muted-foreground uppercase tracking-wider">
+      <div className="p-3 sm:p-6 space-y-1 overflow-visible flex-grow flex flex-col">
+        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
           {product.category.replace('-', ' ')}
         </p>
 
-        <div className="relative overflow-visible min-h-[4.5rem]">
+        <div className="relative overflow-visible min-h-[3rem] sm:min-h-[4.5rem]">
           <h3
-            className="font-semibold text-foreground group-hover:text-primary transition-all duration-300 text-lg leading-relaxed"
+            className="font-semibold text-foreground group-hover:text-primary transition-all duration-300 text-sm sm:text-lg leading-tight sm:leading-relaxed"
           >
-            <span className="line-clamp-3">
+            <span className="line-clamp-2 sm:line-clamp-3">
               {product.name}
             </span>
           </h3>
