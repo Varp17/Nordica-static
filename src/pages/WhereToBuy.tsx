@@ -1,10 +1,10 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
-import { Globe, ExternalLink } from "lucide-react";
+import { Globe, ExternalLink, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface Distributor {
   name: string;
@@ -194,14 +194,29 @@ const distributorData: RegionData[] = [
 
 const WhereToBuy = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
 
-  const filteredData = distributorData.map(region => ({
-    ...region,
-    countries: region.countries.filter(country =>
-      country.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      country.distributors.some(d => d.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    ),
-  })).filter(region => region.countries.length > 0);
+  // Filter logic
+  const filteredData = useMemo(() => {
+    let filtered = distributorData.map(region => ({
+      ...region,
+      countries: region.countries.filter(country =>
+        country.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        country.distributors.some(d => d.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      ),
+    }));
+
+    if (selectedRegion) {
+      filtered = filtered.filter(region => region.region === selectedRegion);
+    }
+
+    return filtered.filter(region => region.countries.length > 0);
+  }, [searchTerm, selectedRegion]);
+
+  const totalResults = filteredData.reduce(
+    (sum, region) => sum + region.countries.reduce((countrySum, country) => countrySum + country.distributors.length, 0),
+    0
+  );
 
   return (
     <>
@@ -213,131 +228,244 @@ const WhereToBuy = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
         <Header />
         <main className="flex-1">
-          {/* Header */}
-          <section className="bg-secondary py-12 lg:py-16">
-            <div className="container-wide">
-              <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                <Link to="/" className="hover:text-foreground">Home</Link>
-                <span>/</span>
-                <span className="text-foreground">Where to Buy</span>
+          {/* Hero Section */}
+          <section className="relative py-20 lg:py-28 overflow-hidden border-b border-slate-200">
+            <div className="absolute inset-0 z-0">
+              <img
+                src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2070&auto=format&fit=crop"
+                alt="Car detailing background"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50 backdrop-blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-blue-900/20"></div>
+            </div>
+
+            <div className="container mx-auto px-4 relative z-10 text-center text-white max-w-4xl">
+              <nav className="flex items-center justify-center gap-2 text-sm text-slate-300 mb-8 animate-fade-in">
+                <Link to="/" className="hover:text-white transition-colors duration-300">Home</Link>
+                <span className="text-slate-400">/</span>
+                <span className="text-white font-semibold">Where to Buy</span>
               </nav>
-              <h1 className="text-3xl lg:text-4xl font-bold text-foreground">Where to Buy</h1>
-              <p className="text-muted-foreground mt-2">Find Detail Guardz distributors worldwide</p>
+              <h1 className="text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+                Find Your Local Distributor
+              </h1>
+              <p className="text-lg lg:text-xl text-slate-200 drop-shadow-md animate-fade-in-up leading-relaxed" style={{ animationDelay: "0.2s" }}>
+                Access Detail Guardz premium products from authorized distributors worldwide
+              </p>
             </div>
           </section>
 
-          <section className="py-12 lg:py-20">
-            <div className="container-wide">
-              {/* Online Store CTA */}
-              <div className="bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-8 lg:p-12 mb-12 text-center">
-                <h2 className="text-2xl lg:text-3xl font-bold text-primary-foreground mb-4">
-                  Shop Our Online Store
-                </h2>
-                <p className="text-primary-foreground/80 mb-6 max-w-2xl mx-auto">
-                  Can't find a distributor nearby? Shop directly from us with worldwide shipping available.
-                </p>
-                <Button variant="secondary" size="lg" asChild>
-                  <Link to="/products">Shop Online Now</Link>
-                </Button>
+          {/* Search & Filter Section */}
+          <section className="py-12 lg:py-16 bg-white border-b border-slate-200">
+            <div className="container mx-auto px-4 max-w-6xl">
+              {/* Search Bar */}
+              <div className="relative mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
+                <input
+                  type="text"
+                  placeholder="Search by distributor name or country..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3.5 text-base border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white placeholder-slate-400"
+                />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm("")}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
               </div>
 
-              {/* Search */}
-              <div className="max-w-md mx-auto mb-12">
-                <div className="relative">
-                  <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="Search by country or distributor name..."
-                    className="w-full pl-12 pr-4 h-12 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
+              {/* Region Filter Tabs */}
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedRegion(null)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedRegion === null
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    }`}
+                >
+                  All Regions
+                </button>
+                {distributorData.map((region) => (
+                  <button
+                    key={region.region}
+                    onClick={() => setSelectedRegion(region.region)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedRegion === region.region
+                      ? "bg-blue-600 text-white shadow-md"
+                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      }`}
+                  >
+                    {region.region}
+                  </button>
+                ))}
               </div>
 
-              {/* Distributors by Region */}
-              {filteredData.map((regionData) => (
-                <div key={regionData.region} className="mb-16">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-8 pb-4 border-b">
-                    {regionData.region}
-                  </h2>
+              {/* Results Counter */}
+              <div className="mt-6 text-sm text-slate-600">
+                <span className="font-semibold text-slate-800">{totalResults}</span> distributor{totalResults !== 1 ? "s" : ""} found
+              </div>
+            </div>
+          </section>
 
-                  {regionData.countries.map((countryData) => (
-                    <div key={countryData.country} className="mb-10">
-                      <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                        <Globe className="h-5 w-5 text-primary" />
-                        {countryData.country}
-                      </h3>
+          {/* Distributors Grid */}
+          <section className="py-12 lg:py-20 bg-gradient-to-b from-white to-slate-50">
+            <div className="container mx-auto px-4 max-w-6xl">
+              {filteredData.length > 0 ? (
+                <>
+                  {filteredData.map((regionData, regionIdx) => (
+                    <div key={regionData.region} className="mb-16 animate-fade-in" style={{ animationDelay: `${0.1 * regionIdx}s` }}>
+                      {/* Region Header */}
+                      <div className="flex items-center gap-4 mb-10">
+                        <div className="w-1 h-8 bg-gradient-to-b from-blue-600 to-blue-400 rounded-full"></div>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
+                          {regionData.region}
+                        </h2>
+                        <span className="ml-auto text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                          {regionData.countries.reduce((sum, c) => sum + c.distributors.length, 0)} distributors
+                        </span>
+                      </div>
 
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {countryData.distributors.map((distributor, idx) => (
+                      {/* Countries Grid */}
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                        {regionData.countries.map((countryData, countryIdx) => (
                           <div
-                            key={idx}
-                            className="bg-card rounded-xl p-6 shadow-soft hover:shadow-elevated transition-all border border-border/50 hover:border-primary/30"
+                            key={countryData.country}
+                            className="group bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-6 lg:p-7 transition-all duration-300 hover:shadow-lg hover:shadow-blue-100"
+                            style={{ animationDelay: `${0.05 * countryIdx}s` }}
                           >
-                            <div className="flex flex-col h-full">
-                              <div className="flex-1">
-                                <h4 className="font-semibold text-foreground mb-2 leading-tight">
-                                  {distributor.name}
-                                </h4>
-                                {distributor.isExclusive && (
-                                  <span className="inline-block text-xs bg-primary/10 text-primary px-2 py-1 rounded-full mb-3 font-medium">
-                                    Exclusive Distributor
-                                  </span>
-                                )}
-                                {distributor.email && (
-                                  <p className="text-sm text-muted-foreground mb-2">
-                                    {distributor.email}
-                                  </p>
-                                )}
-                              </div>
-
-                              {distributor.url && (
-                                <a
-                                  href={distributor.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-medium mt-3"
-                                >
-                                  Visit Website
-                                  <ExternalLink className="h-4 w-4" />
-                                </a>
-                              )}
+                            {/* Country Header */}
+                            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                              <Globe className="h-5 w-5 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                              <h3 className="text-lg font-bold text-slate-900">{countryData.country}</h3>
                             </div>
+
+                            {/* Distributors List */}
+                            <ul className="space-y-4">
+                              {countryData.distributors.map((distributor, idx) => (
+                                <li key={idx} className="group/item">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      {distributor.url ? (
+                                        <a
+                                          href={distributor.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="text-slate-700 hover:text-blue-600 font-medium transition-colors duration-300 flex items-center gap-2 group/link break-words"
+                                        >
+                                          <span>{distributor.name}</span>
+                                          <ExternalLink className="h-4 w-4 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 flex-shrink-0 mt-0.5" />
+                                        </a>
+                                      ) : (
+                                        <span className="text-slate-700 font-medium block">{distributor.name}</span>
+                                      )}
+
+                                      {/* Exclusive Badge */}
+                                      {distributor.isExclusive && (
+                                        <span className="inline-block mt-2 px-2 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-md border border-amber-200">
+                                          ⭐ Exclusive
+                                        </span>
+                                      )}
+
+                                      {/* Email Contact */}
+                                      {distributor.email && (
+                                        <a
+                                          href={`mailto:${distributor.email}`}
+                                          className="text-xs text-slate-500 hover:text-blue-600 transition-colors duration-300 block mt-2 truncate"
+                                        >
+                                          {distributor.email}
+                                        </a>
+                                      )}
+                                    </div>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         ))}
                       </div>
                     </div>
                   ))}
-                </div>
-              ))}
-
-              {filteredData.length === 0 && (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground text-lg">
-                    No distributors found matching your search.
-                  </p>
+                </>
+              ) : (
+                <div className="text-center py-20">
+                  <Globe className="h-16 w-16 text-slate-300 mx-auto mb-4" />
+                  <h3 className="text-2xl font-bold text-slate-800 mb-2">No Results Found</h3>
+                  <p className="text-slate-600 mb-6">Try adjusting your search or filter criteria</p>
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedRegion(null);
+                    }}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium"
+                  >
+                    Clear Filters
+                  </button>
                 </div>
               )}
+            </div>
+          </section>
 
-              {/* Become a Distributor */}
-              <div className="mt-16 text-center bg-secondary/50 rounded-2xl p-8 lg:p-12">
-                <h3 className="text-2xl font-bold text-foreground mb-3">Become a Distributor</h3>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Interested in carrying Detail Guardz products in your region? We're always looking for passionate partners to join our global network.
-                </p>
-                <Button variant="default" size="lg" asChild>
-                  <Link to="/contact">Contact Us</Link>
-                </Button>
-              </div>
+          {/* CTA Section */}
+          <section className="py-16 lg:py-20 bg-gradient-to-r from-blue-600 to-blue-700 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/20 rounded-full -mr-40 -mt-40 blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-400/20 rounded-full -ml-40 -mb-40 blur-3xl" />
+
+            <div className="container mx-auto px-4 relative z-10 max-w-3xl text-center text-white">
+              <h3 className="text-3xl lg:text-4xl font-bold mb-4">Become a Distributor</h3>
+              <p className="text-lg text-blue-50 mb-8 leading-relaxed">
+                Interested in carrying Detail Guardz products in your region? Join our global network of premium distributors.
+              </p>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="font-semibold px-8 h-12 bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-300"
+                asChild
+              >
+                <Link to="/contact">Contact Us Today</Link>
+              </Button>
             </div>
           </section>
         </main>
         <Footer />
       </div>
+
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
     </>
   );
 };

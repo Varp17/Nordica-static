@@ -8,19 +8,16 @@ import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/ui/ProductCard';
 import { getProductBySlug, products } from '@/data/products';
 import { useCurrency } from '@/contexts/CurrencyContext';
-import { useCart } from '@/contexts/CartContext';
+
 import ProductDescription from '@/components/productdetailpage/ProductDescription';
 import ProductVideoSection from '@/components/productdetailpage/ProductVdieoSection';
-import CustomerReviewsSection from '@/components/productdetailpage/ProdctReviewsection';
 import CheckoutModal from '@/components/CheckoutModal';
 
 const ProductDetail = () => {
     const { slug } = useParams<{ slug: string }>();
     const product = getProductBySlug(slug || '');
     const { formatPrice } = useCurrency();
-    const { addItem } = useCart();
     const [quantity, setQuantity] = useState(1);
-    const [addedToCart, setAddedToCart] = useState(false);
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedColor, setSelectedColor] = useState(
         product?.colorOptions?.[0]?.value ?? 'default'
@@ -79,20 +76,6 @@ const ProductDetail = () => {
     const selectedColorOption = colorOptions.find(c => c.value === selectedColor) || colorOptions[0];
     const currentPrice = selectedColorOption.price;
 
-    const handleAddToCart = () => {
-        for (let i = 0; i < quantity; i++) {
-            addItem({
-                id: `${product.id}-${selectedColor}`,
-                name: `${product.name} (${selectedColorOption.name})`,
-                price: currentPrice,
-                image: selectedColorOption.image,
-                category: product.category,
-            });
-        }
-        setAddedToCart(true);
-        setTimeout(() => setAddedToCart(false), 2000);
-    };
-
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
 
@@ -111,14 +94,6 @@ const ProductDetail = () => {
                 {/* Breadcrumb */}
                 <div className="container mx-auto px-4 mb-6">
                     <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Link to="/" className="hover:text-foreground transition-colors">Automotive</Link>
-                        <span>/</span>
-                        <Link to="/products" className="hover:text-foreground transition-colors">Car Care</Link>
-                        <span>/</span>
-                        <Link to={`/products?category=${product.category}`} className="hover:text-foreground transition-colors">
-                            {product.category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                        </Link>
-                        <span>/</span>
                         <span className="text-foreground">{product.name}</span>
                     </nav>
                 </div>
@@ -306,23 +281,6 @@ const ProductDetail = () => {
 
                                 <div className="flex gap-3">
                                     <Button
-                                        onClick={handleAddToCart}
-                                        disabled={!product.inStock || addedToCart}
-                                        className="flex-1 h-12 text-base gap-2"
-                                    >
-                                        {addedToCart ? (
-                                            <>
-                                                <Check className="h-5 w-5" />
-                                                Added to Cart
-                                            </>
-                                        ) : (
-                                            <>
-                                                <ShoppingCart className="h-5 w-5" />
-                                                Add to Cart
-                                            </>
-                                        )}
-                                    </Button>
-                                    <Button
                                         onClick={() => setIsCheckoutModalOpen(true)}
                                         disabled={!product.inStock}
                                         className="flex-1 h-12 text-base gap-2 gradient-primary"
@@ -505,16 +463,6 @@ const ProductDetail = () => {
                     </div>
                 )}
             </div>
-            {/* Customer Reviews Section */}
-            <CustomerReviewsSection
-                overallRating={product.rating}
-                totalReviews={product.reviewCount}
-                ratingBreakdown={product.ratingBreakdown}
-                reviews={product.reviews}
-                onWriteReview={() => console.log('Write a review clicked')}
-                onLoadMore={() => console.log('Load more clicked')}
-            />
-
             {/* Checkout Modal */}
             <CheckoutModal
                 product={product}
