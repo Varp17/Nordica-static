@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="relative bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-elevated hover:border-primary/30 hover:-translate-y-1 hover:z-10 h-full flex flex-col group">
+    <Link to={`/products/${product.slug}`} className="relative bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-elevated hover:border-primary/30 hover:-translate-y-1 hover:z-10 h-full flex flex-col group">
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         <img
@@ -68,18 +68,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Button
             className="w-full gradient-primary"
             size="sm"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.open(product.url, "_blank");
-            }}
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
             Buy Now
           </Button>
-          <p className="text-[10px] text-red-500 text-center mt-1.5 sm:mt-2 opacity-90 leading-tight">
-            <span className="sm:hidden">Redirects to Amazon</span>
-            <span className="hidden sm:inline">Redirecting to Amazon checkout</span>
+          <p className="text-[10px] text-primary text-center mt-1.5 sm:mt-2 opacity-90 leading-tight">
+            <span className="sm:hidden">View Details</span>
+            <span className="hidden sm:inline">Click to view product</span>
           </p>
         </div>
 
@@ -170,8 +165,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         )}
       </div>
-    </div>
-
+    </Link>
   );
 };
 

@@ -116,24 +116,6 @@ export function Footer() {
                   proudly Serving customers<br />across North America
                 </span>
               </li>
-              <li>
-                <a
-                  href="mailto:info@detailguardz.com"
-                  className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors"
-                >
-                  <Mail className="h-5 w-5 text-primary shrink-0" />
-                  info@nordicaplastics.ca
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+1234567890"
-                  className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors"
-                >
-                  <Phone className="h-5 w-5 text-primary shrink-0" />
-                  1-800-DETAIL
-                </a>
-              </li>
             </ul>
           </div>
         </div>

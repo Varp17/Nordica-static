@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Star, ShoppingCart } from "lucide-react";
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { Link } from "react-router-dom";
+import { products as allProducts } from '@/data/products';
 
 export default function FeaturedProducts() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,98 +11,8 @@ export default function FeaturedProducts() {
   const [touchEnd, setTouchEnd] = useState(0);
   const { formatPrice } = useCurrency();
 
-  const products = [
-    {
-      id: 1,
-      name: "dirt Lock Car Wash Insert – Bucket Filter for 3–8 Gallon Round Pails – Traps Debris, Prevents Swirl Marks – Self-Locking Rubber Grips, Venturi Flow, Cleaning Tool ",
-      price: 24.99,
-      rating: 4.7,
-      reviews: 2195,
-      image: "https://m.media-amazon.com/images/I/71FKBeRc4cL._AC_SX679_.jpg",
-      badge: "Premium",
-      url: "https://www.amazon.com/Detail-Guardz-Dirt-Bucket-Insert/dp/B07CKC4M9D?ref_=ast_sto_dp&th=1"
-    },
-    {
-      id: 2,
-      name: "Dirt Lock Scrub Wall 180/360 – Washboard Attachment Dirt Lock - Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts",
-      price: 20.99,
-      rating: 4.5,
-      reviews: 823,
-      image: "https://m.media-amazon.com/images/I/71PucAJR9iL._AC_SX466_.jpg",
-      badge: "Premium",
-      url: "https://www.amazon.com/DETAIL-GUARDZ-Bucket-Filter-Washboard/dp/B09CRX2D31?ref_=ast_sto_dp&th=1"
-    },
-    {
-      id: 3,
-      name: "The Dirt Lock Scrub and Pump Attachment for Car Wash Bucket Filter",
-      price: 16.99,
-      rating: 4.5,
-      reviews: 238,
-      image: "https://m.media-amazon.com/images/I/71FXvGVXeHS._AC_SX466_.jpg",
-      badge: "Premium",
-      url: "https://www.amazon.com/DETAIL-GUARDZ-Attachment-Bucket-Filter/dp/B08FTK9PJJ?ref_=ast_sto_dp&th=1"
-    },
-    // {
-    //   id: 4,
-    //   name: "Dirt Lock Scrub and Pump Bundle Complete Kit (Includes Dirt Lock Car Wash Bucket Filter) ",
-    //   price: 199.99,
-    //   rating: 4.9,
-    //   reviews: 156,
-    //   image: "https://m.media-amazon.com/images/S/aplus-media/sc/8b3aa2c3-50fc-492d-b032-301bd651808d.__CR0,244,1000,619_PT0_SX970_V1___.jpg",
-    //   badge: "Premium",
-    //   url: "https://www.amazon.com/DETAIL-GUARDZ-Bundle-Complete-Bucket/dp/B08WWPLGNB?ref_=ast_sto_dp"
-    // },
-    {
-      id: 5,
-      name: "Dirt Lock Pad Washer System Attachment with Spray Cleaner",
-      price: 58.99,
-      rating: 3.9,
-      reviews: 68,
-      image: "https://m.media-amazon.com/images/I/710cuaz8RzS._AC_SX466_.jpg",
-      badge: "Popular",
-      url: "https://www.amazon.com/Detail-Guardz-Washer-Attachment-Cleaner/dp/B07VGMKW7S?ref_=ast_sto_dp&th=1"
-    },
-    {
-      id: 6,
-      name: "The Dirt Lock Pad Washer Bundle Complete Kit (Black) Includes Dirt Lock Bucket Filter",
-      price: 49.99,
-      rating: 3.9,
-      reviews: 68,
-      image: "https://m.media-amazon.com/images/I/61jDCK8t-1S._AC_SX466_.jpg",
-      badge: "Premium",
-      url: "https://www.amazon.com/Detail-Guardz-Attachment-Without-Cleaner/dp/B07XL4CL1T/ref=pd_cer_fm_1/135-9153945-0013018?pd_rd_r=457f8f31-4d35-4d41-86e7-f8ad048dcd17&pd_rd_wg=vU41E&pd_rd_w=ynUdM&pd_rd_i=B07XL4CL1T&psc=1"
-    },
-    {
-      id: 7,
-      name: "Hose Guide – 4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires ",
-      price: 19.99,
-      rating: 4.6,
-      reviews: 2777,
-      image: "https://m.media-amazon.com/images/I/61wf9wewH5L._AC_SX466_.jpg",
-      badge: "Premium",
-      url: "https://www.amazon.com/DETAIL-GUARDZ-Hose-Guide-Motorcycles/dp/B0FHKTM2YW?ref_=ast_sto_dp&th=1"
-    },
-    // {
-    //   id: 8,
-    //   name: "The Microfiber and Foam Pad Cleaner Spray (6X 650ML)",
-    //   price: 79.99,
-    //   rating: 4.9,
-    //   reviews: 345,
-    //   image: "https://m.media-amazon.com/images/I/8153MDtrc5L._AC_SX466_.jpg",
-    //   badge: "Premium",
-    //   url: "https://www.amazon.com/DETAIL-GUARDZ-Microfiber-Cleaner-Spray/dp/B08WT79STZ?ref_=ast_sto_dp"
-    // },
-    // {
-    //   id: 9,
-    //   name: " Car Hose Guides (2 Pack Black)",
-    //   price: 299.99,
-    //   rating: 5.0,
-    //   reviews: 178,
-    //   image: "https://m.media-amazon.com/images/I/61d5UKVXwoL._AC_SX466_.jpg",
-    //   badge: "Premium",
-    //   url: "https://www.amazon.com/Detail-Guardz-Hose-Guide-Black/dp/B07ND4L2ML?ref_=ast_sto_dp&th=1"
-    // }
-  ];
+  // Pick first 6 for featured
+  const products = allProducts.slice(0, 6);
 
   const getItemsPerPage = () => {
     if (typeof window !== 'undefined') {
@@ -222,81 +133,71 @@ export default function FeaturedProducts() {
                   className="flex-shrink-0 px-2 md:px-3"
                   style={{ width: `${100 / itemsPerPage}%` }}
                 >
-                  <div className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-300 group h-full">
-                    <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-slate-100">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute top-3 md:top-4 left-3 md:left-4">
-                        <span className="px-2 py-1 md:px-3 md:py-1.5 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg">
-                          {product.badge}
-                        </span>
+                  <Link to={`/products/${product.slug}`} className="block h-full group">
+                    <div className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-300 group h-full">
+                      <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-slate-100">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute top-3 md:top-4 left-3 md:left-4">
+                          <span className="px-2 py-1 md:px-3 md:py-1.5 bg-blue-600 text-white text-xs font-bold rounded-full shadow-lg">
+                            {product.badge}
+                          </span>
+                        </div>
                       </div>
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
 
-                      </div>
-                    </div>
+                      <div className="p-4 md:p-6">
+                        <h3 className="text-[10px] sm:text-sm font-bold text-gray-900 mb-2 md:mb-3 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
+                          {product.name}
+                        </h3>
 
-                    <div className="p-4 md:p-6">
+                        <div className="flex items-center gap-1 mb-2 md:mb-3">
+                          {[...Array(5)].map((_, i) => {
+                            const rating = Math.round(product.rating * 2) / 2;
 
+                            if (i + 1 <= Math.floor(rating)) {
+                              return (
+                                <Star
+                                  key={i}
+                                  className="w-4 h-4 fill-blue-600 text-blue-600"
+                                />
+                              );
+                            }
 
-                      <h3 className="text-[10px] sm:text-sm font-bold text-gray-900 mb-2 md:mb-3 line-clamp-2 min-h-[2.5rem] md:min-h-[3.5rem]">
-                        {product.name}
-                      </h3>
+                            if (i < rating && i + 1 > rating) {
+                              return (
+                                <div key={i} className="relative w-4 h-4">
+                                  <Star className="w-4 h-4 text-gray-300" />
+                                  <div
+                                    className="absolute inset-0 overflow-hidden"
+                                    style={{ width: "50%" }}
+                                  >
+                                    <Star className="w-4 h-4 fill-blue-600 text-blue-600" />
+                                  </div>
+                                </div>
+                              );
+                            }
 
-                      <div className="flex items-center gap-1 mb-2 md:mb-3">
-                        {[...Array(5)].map((_, i) => {
-                          const rating = Math.round(product.rating * 2) / 2;
-
-                          if (i + 1 <= Math.floor(rating)) {
                             return (
                               <Star
                                 key={i}
-                                className="w-4 h-4 fill-blue-600 text-blue-600"
+                                className="w-4 h-4 text-gray-300"
                               />
                             );
-                          }
+                          })}
+                        </div>
 
-                          if (i < rating && i + 1 > rating) {
-                            return (
-                              <div key={i} className="relative w-4 h-4">
-                                <Star className="w-4 h-4 text-gray-300" />
-                                <div
-                                  className="absolute inset-0 overflow-hidden"
-                                  style={{ width: "50%" }}
-                                >
-                                  <Star className="w-4 h-4 fill-blue-600 text-blue-600" />
-                                </div>
-                              </div>
-                            );
-                          }
-
-                          return (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 text-gray-300"
-                            />
-                          );
-                        })}
-                      </div>
-
-                      <p className="text-xl md:text-2xl font-bold text-blue-600 mb-3 md:mb-4">
-                        {formatPrice(product.price)}
-                      </p>
-                      <Link
-                        to={`${product.url}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block"
-                      >
+                        <p className="text-xl md:text-2xl font-bold text-blue-600 mb-3 md:mb-4">
+                          {formatPrice(product.price)}
+                        </p>
                         <button className="w-full px-4 py-2 md:px-6 md:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base">
                           Buy Now
                         </button>
-                      </Link>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>

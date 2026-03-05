@@ -15,9 +15,11 @@ import Cart from "./pages/Cart";
 import Products from "./pages/Product";
 import { Scroll } from "lucide-react";
 import ScrolltoTop from "./components/ScrolltoTop";
-import { ShippingReturnsPage } from "./pages/shiping-returns";
+import { ShippingReturnsPage } from "./pages/shipping-returns";
 import { FAQPage } from "./pages/Faqpage";
 import Media from "./pages/Media";
+
+import ProductDetail from "./pages/ProductDetail";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +40,7 @@ const App = () => (
               <Route path="/where-to-buy" element={<WhereToBuy />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/products/:slug" element={<ProductDetail />} />
               <Route path="/media" element={<Media />} />
               <Route path="/shipping" element={<ShippingReturnsPage />} />
               <Route path="/faq" element={<FAQPage />} />
