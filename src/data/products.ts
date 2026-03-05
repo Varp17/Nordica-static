@@ -1,3 +1,28 @@
+import dirtLockBlue from '@/assets/dirt lock car wash blue.jpg';
+import dirtLockBlack from '@/assets/dirt lock car wash black.jpg';
+import dirtLockRed from '@/assets/dirt lock car wash red.jpg';
+import dirtLockYellow from '@/assets/dirt lock car wash yellow.jpg';
+import dirtLockBlackWhite from '@/assets/dirt lock car wash black white.jpg';
+
+import scrubWallWhite from '@/assets/Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts (White).jpg';
+import scrubWallBlack from '@/assets/Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts (Black).jpg';
+import scrubWallRed from '@/assets/Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts (Red).jpg';
+
+import dirtLockScrubPumpBlack from '@/assets/The Dirt Lock Scrub and Pump black.jpg';
+import dirtLockScrubPumpWhite from '@/assets/The Dirt Lock Scrub and Pump white.jpg';
+
+import padWasherBlackWithCleaner from '@/assets/Dirt Lock Pad Washer System Attachment with Spray Cleaner (Black).jpg';
+import padWasherWhiteWithCleaner from '@/assets/The Dirt Lock Pad Washer System Attachment with Spray Cleaner (White).jpg';
+import padWasherBlack from '@/assets/Dirt Lock Pad Washer System Attachment (Black).jpg';
+import padWasherWhite from '@/assets/The Dirt Lock Pad Washer System Attachment (White).jpg';
+
+import hoseRollerYellow from '@/assets/4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Yellow).jpg';
+import hoseRollerBlack from '@/assets/4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Black).jpg';
+import hoseRollerBlackOld from '@/assets/Car Hose Guides (4 PACK BLACK).jpg';
+import hoseRollerBlue from '@/assets/4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Blue).jpg';
+import hoseRollerNeon from '@/assets/4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Neon).jpg';
+import hoseRollerRed from '@/assets/4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Red).jpg';
+
 export interface Video {
   url: string;
   title: string;
@@ -31,6 +56,13 @@ export interface RatingBreakdown {
   count: number;
 }
 
+export interface ColorOption {
+  name: string;
+  value: string;
+  image: string;
+  price: number;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -51,6 +83,7 @@ export interface Product {
   url?: string;
   brand: string;
   specifications: Specifications;
+  colorOptions?: ColorOption[];
   videos?: {
     main: Video;
     additional: Video[];
@@ -156,35 +189,67 @@ export const categories = [
 export const products: Product[] = [
   {
     id: 'Dirt-Lock-Insert',
-    name: 'Dirt Lock Car Wash Insert – Bucket Filter for 3–8 Gallon Round Pails – Traps Debris, Prevents Swirl Marks – Self-Locking Rubber Grips, Venturi Flow, Cleaning Tool ',
+    name: 'DETAIL GUARDZ Dirt Lock Car Wash Insert – Bucket Filter for 3–8 Gallon Round Pails – Traps Debris, Prevents Swirl Marks – Self-Locking Rubber Grips, Venturi Flow, Cleaning Tool (Blue)',
     slug: 'dirt-lock-car-wash-insert',
-    description: 'The Dirt Lock car wash bucket filter is a detailing tool that protects your vehicle\'s paint from swirl marks and scratches.',
-    longDescription: 'The Dirt Lock car wash bucket filter is the most effective way to protect your vehicle\'s paint from swirl marks and scratches. It works by trapping dirt and debris at the bottom of the bucket, keeping your wash water clean. The patented Venturi design uses the movement of your hand to create a pulsed suction that draws dirt underneath the filter and keeps it there.',
+    description: 'Patented Venturi bucket filter that traps grit and debris at the bottom of your wash bucket — keeping your mitt in cleaner water to prevent swirl marks and scratches on your vehicle\'s paint.',
+    longDescription: `DETAIL GUARDZ DIRT LOCK CAR WASH BUCKET INSERT
+
+Our patented design utilizes the motion of your hand to pump and trap debris underneath the screen. The Dirt Lock has a complex Venturi filtering system that manipulates the flow of water in a downward direction. This allows dirt particles to collect underneath the screen without a way for it to re-enter into the clean water. In short, every time you pump your hand in the bucket you are cycling the dirt underneath the screen and replenishing clean water above to help prevent swirl-marks and scratches on the painted surface.
+
+ONE Dirt Lock will filter your wash water like you have never seen before. Protect your car and eliminate the main cause of swirl marks on your paintwork! Proudly Made In Canada.
+
+Fits inside nearly any 3, 4, 5, 6, 7 or 8 gallon standard round wash pail with its flexible, self-adjusting, rubber locking grips.
+
+VENTURI EFFECT: The Dirt Lock manipulates the flow of water by creating a high pressure underneath the filter and a low pressure above. This results in a tunneling effect and pushes the debris safely underneath the screen and provides much cleaner water above to reuse on your vehicle's paintwork.
+
+AUTOMATIC SELF-LOCKING: Simply push the Dirt Lock inside almost any 3–8 gallon round wash bucket and it will automatically adjust itself for the perfect fit. The Dirt Lock is molded from a special plastic resin that sinks like an anchor in the bucket.
+
+THE ULTIMATE SCRATCH-PROTECTION: It's locked and loaded with every detail possible to ensure your vehicle's finish is maintained to the highest standards.`,
     price: 24.99,
     originalPrice: null,
     category: 'Detailing-Accessories',
-    image: 'https://m.media-amazon.com/images/I/71FKBeRc4cL._AC_SX679_.jpg',
-    images: ['https://m.media-amazon.com/images/I/71FKBeRc4cL._AC_SX679_.jpg'],
-    features: [
-      'Patented Venturi Pulsed Suction',
-      'Self-Locking Rubber Grips',
-      'Traps Dirt and Debris',
-      'Prevents Swirl Marks',
-      'Fits 3-8 Gallon Buckets'
+    image: dirtLockBlackWhite,
+    images: [
+      dirtLockBlackWhite,
+      dirtLockBlack,
+      dirtLockBlue,
+      dirtLockRed,
+      dirtLockYellow,
     ],
-    compatibility: ['3-8 Gallon Round Pails'],
-    rating: 4.9,
-    reviewCount: 247,
+    features: [
+      'KEEPS DIRT AT THE BOTTOM: Directional channels trap grit and debris below the insert so your wash mitt stays in cleaner water, reducing swirl marks and scratches during car washing.',
+      'UNIVERSAL BUCKET FIT: Fits most standard 3–8 gallon round buckets (10.2–10.72" base). Flexible rubber tabs create a snug, secure fit for home users and professional detailers.',
+      'SELF-LOCKING, STAYS PUT: Simply press into place, no tools needed. Weighted, durable construction keeps the insert locked at the bottom, even during aggressive washing.',
+      'ADVANCED DEBRIS FILTRATION: Venturi-style flow pulls dirt underneath the screen with each dunk, continuously filtering wash water without power or accessories.',
+      'BUILT FOR PRO DETAILING: Made from premium, high-strength resin for long-term durability. Designed and manufactured in Canada by DETAIL GUARDZ, trusted by detailing professionals worldwide.',
+    ],
+    compatibility: ['3–8 Gallon Round Pails', 'Standard Wash Buckets', 'Cars', 'Trucks', 'Motorcycles'],
+    rating: 4.7,
+    reviewCount: 2195,
     inStock: true,
-    badge: 'Best Seller',
-    url: "https://www.amazon.com/Detail-Guardz-Dirt-Bucket-Insert/dp/B07CKC4M9D?ref_=ast_sto_dp&th=1",
+    badge: 'Premium',
+    url: "https://www.amazon.com/dp/B07CKLPJZR",
     brand: "DETAIL GUARDZ",
-    specifications: DEFAULT_SPECIFICATIONS,
+    specifications: {
+      brand: "DETAIL GUARDZ",
+      material: "Plastic (High-Strength Resin)",
+      weight: "490 Grams (1.08 lbs)",
+      dimensions: '10.43"L x 10.43"W x 2.56"H',
+      capacity: "5 Gallons",
+      manufacturer: "DETAIL GUARDZ Canada",
+    },
+    colorOptions: [
+      { name: 'White', value: 'white', image: dirtLockBlackWhite, price: 24.99 },
+      { name: 'Blue', value: 'blue', image: dirtLockBlue, price: 24.99 },
+      { name: 'Black', value: 'black', image: dirtLockBlack, price: 24.99 },
+      { name: 'Red', value: 'red', image: dirtLockRed, price: 24.99 },
+      { name: 'Gold', value: 'gold', image: dirtLockYellow, price: 24.99 },
+    ],
     videos: {
       main: {
         url: "https://www.youtube.com/embed/jmm-ahVrq4g",
-        title: "Dirt Lock: The Ultimate Filter",
-        description: "The original Dirt Lock is the ultimate tool for a swirl-free wash. See how it traps grit and debris effectively."
+        title: "Dirt Lock: The Ultimate Bucket Filter",
+        description: "The original Dirt Lock is the ultimate tool for a swirl-free wash. See how the patented Venturi system traps grit and debris effectively, keeping your wash water clean."
       },
       additional: [
         {
@@ -195,34 +260,66 @@ export const products: Product[] = [
       ]
     },
     reviews: DEFAULT_REVIEWS,
-    ratingBreakdown: DEFAULT_RATING_BREAKDOWN,
+    ratingBreakdown: [
+      { stars: 5, percentage: 74, count: 1624 },
+      { stars: 4, percentage: 13, count: 285 },
+      { stars: 3, percentage: 6, count: 132 },
+      { stars: 2, percentage: 3, count: 66 },
+      { stars: 1, percentage: 4, count: 88 },
+    ],
     country: null
   },
   {
     id: 'Dirt-Lock-Scrub-Wall',
-    name: 'Dirt Lock Scrub Wall 180/360 – Washboard Attachment Dirt Lock - Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts ',
+    name: 'DETAIL GUARDZ Dirt Lock Scrub Wall 180/360 – Washboard Attachment Dirt Lock - Bucket Filter – Vertical Cleaning Tool for Brushes, Mitts (White)',
     slug: 'dirt-lock-scrub-wall',
-    description: 'The Scrub Wall attachment turns your Dirt Lock into a vertical cleaning surface for your mitts and brushes.',
-    longDescription: 'The Scrub Wall attachment expands your Dirt Lock\'s cleaning capabilities by providing a vertical surface to scrub your wash mitts, brushes, and sponges. It simply clicks into the Dirt Lock and allows you to clean your tools more effectively by using the vertical motion. Available in 180-degree or 360-degree configurations.',
+    description: 'Vertical cleaning extension for the Dirt Lock bucket filter — snaps in instantly, isolates debris behind the screen, and gives mitts & brushes a full 3D scrubbing surface without sacrificing bucket space.',
+    longDescription: `DETAIL GUARDZ DIRT LOCK SCRUB WALL 180/360 SYSTEM ATTACHMENT
+
+The Dirt Lock Scrub Wall attachment is a vertical extension of the Dirt Lock's pressurized cleaning power. Simply snap the attachment into your Dirt Lock bucket filter to easily clean your wheel brushes, wash mitts and more without having to sacrifice hardly any bucket space. Simply scrub your wash media on the side of the Scrub Wall. The debris is now behind the scrub wall screen and is pumped and trapped below the filter to provide cleaner, filtered water for reuse. Whether you move your wash media forward, backward, left, right, up or down in the bucket, debris is quickly trapped behind the screen and pumped out of harms way with the Dirt Lock Scrub Wall 180/360 system.
+
+VERTICAL EXTENSION OF THE DIRT LOCK'S PRESSURIZED CLEANING POWER: Simply snap the attachment into your Dirt Lock bucket filter to easily clean your wheel brushes, wash mitts and more without having to sacrifice hardly any bucket space.
+
+ATTACHES INTO DIRT LOCK BUCKET FILTER: The Dirt Lock bucket filter allows you to attach the Scrub Wall 180/360 or any of our other detailing tools when needed. When you're finished, simply detach it!
+
+Each Scrub Wall kit contains 180 degrees of coverage, simply connect two 180 kits together for full 360 degree bucket coverage.
+
+OUR MOST ADVANCED BUCKET FILTERING SYSTEM: With the addition of our scrub wall 180/360 attachment, it takes the product to another level by flushing out your wash mitt and tools more thoroughly, resulting in even cleaner wash media and the ability to cycle the debris even quicker underneath the screen. Proudly Made In Canada.`,
     price: 20.99,
+    originalPrice: null,
     category: 'Detailing-Accessories',
-    image: 'https://m.media-amazon.com/images/I/61Qgfvha82L._AC_SX466_.jpg',
-    images: ['https://m.media-amazon.com/images/I/61Qgfvha82L._AC_SX466_.jpg'],
-    features: [
-      'Vertical Cleaning Surface',
-      'Attaches to Dirt Lock',
-      'Cleans Mitts and Brushes',
-      'Modular Design',
-      'Chemical Resistant'
+    image: scrubWallWhite,
+    images: [
+      scrubWallWhite,
+      scrubWallBlack,
+      scrubWallRed,
     ],
-    compatibility: ['Dirt Lock Filter'],
-    rating: 4.8,
-    reviewCount: 183,
+    features: [
+      'VERTICAL CLEANING BOOST FOR DIRT LOCK FILTERS: Transforms your bucket into a 3D cleaning station. The Scrub Wall extends the Dirt Lock system upward, giving wash mitts and brushes more surface to agitate grime while reducing debris recirculation.',
+      'KEEPS WASH WATER CLEANER: Using directional water flow, the Scrub Wall helps isolate contaminants. Dirt is pulled behind the screen and sent below the filter, preventing grime from returning to your mitt or paintwork.',
+      '180° EXPANDABLE DESIGN, 360° UPGRADEABLE: Includes one 180-degree wall; connect a second Scrub Wall for full 360-degree wraparound. Maximizes cleaning contact without taking up extra space.',
+      'FITS ALL STANDARD ROUND PAILS: Compatible with most 3–8 gallon wash buckets with a base diameter between 10.2–10.72 inches. Maintains full water capacity while improving wash quality.',
+      'SNAPS SECURELY INTO BUCKET FILTER BASE: Quickly attaches to the existing Dirt Lock insert without tools. Modular design lets you add or remove the wall as needed.',
+    ],
+    compatibility: ['Dirt Lock Bucket Filter', '3–8 Gallon Round Pails', 'Wash Mitts', 'Wheel Brushes'],
+    rating: 4.5,
+    reviewCount: 823,
     inStock: true,
-    badge: 'Popular',
-    url: "https://www.amazon.com/DETAIL-GUARDZ-Bucket-Filter-Washboard/dp/B09CRX2D31?ref_=ast_sto_dp&th=1",
+    badge: 'Premium',
+    url: "https://www.amazon.com/dp/B09CRX2D31",
     brand: "DETAIL GUARDZ",
-    specifications: DEFAULT_SPECIFICATIONS,
+    specifications: {
+      brand: "DETAIL GUARDZ",
+      material: "Plastic (High-Strength Resin)",
+      weight: "12.3 ounces",
+      dimensions: '12.75"L x 7.5"W x 3"H',
+      manufacturer: "DETAIL GUARDZ Canada",
+    },
+    colorOptions: [
+      { name: 'White', value: 'white', image: scrubWallWhite, price: 20.99 },
+      { name: 'Black', value: 'black', image: scrubWallBlack, price: 20.99 },
+      { name: 'Red', value: 'red', image: scrubWallRed, price: 20.99 },
+    ],
     videos: {
       main: {
         url: "https://www.youtube.com/embed/wgR1NE6h6Zk",
@@ -238,33 +335,62 @@ export const products: Product[] = [
       ]
     },
     reviews: DEFAULT_REVIEWS,
-    ratingBreakdown: DEFAULT_RATING_BREAKDOWN,
+    ratingBreakdown: [
+      { stars: 5, percentage: 65, count: 535 },
+      { stars: 4, percentage: 17, count: 140 },
+      { stars: 3, percentage: 8, count: 66 },
+      { stars: 2, percentage: 4, count: 33 },
+      { stars: 1, percentage: 6, count: 49 },
+    ],
     country: null
   },
   {
     id: 'Dirt-Lock-Scrub-Pump',
-    name: 'The Dirt Lock Scrub and Pump Attachment for Car Wash Bucket Filter ',
+    name: 'DETAIL GUARDZ The Dirt Lock Scrub and Pump Attachment for Car Wash Bucket Filter (Black)',
     slug: 'dirt-lock-scrub-pump',
-    description: 'The Scrub and Pump attachment uses the motion of your hand to pump clean water into your mitt.',
-    longDescription: 'The Scrub and Pump is the ultimate Dirt Lock attachment. As you scrub your mitt against the surface, it uses the pressure of your hand to pump clean, filtered water back into your mitt, ensuring that you are always using the cleanest water possible on your vehicle\'s paint.',
+    description: 'Spring-loaded scrub and pump attachment for the Dirt Lock bucket filter — scrubs your mitt while pumping clean water up and cycling debris safely under the screen.',
+    longDescription: `DETAIL GUARDZ DIRT LOCK SCRUB AND PUMP SYSTEM
+
+Use the Scrub And Pump attachment for added cleaning power with your Dirt Lock bucket filter. Simply push the attachment into place and use it to scrub wash mitts, brushes, hand applicator pads and more! The Dirt Lock scrub and pump attachment works on a spring loaded system to pump cleaner water up and cycle dirty debris safely underneath the screen and out of harms way. The soft rounded scrubbing ridges allow you to scrub and pump away dirt and grime safely under the screen. This is the ultimate bucket filtering system to further enhance the Dirt Locks cleaning power and help ensure your vehicle is safe from swirl-marks and scratches! Proudly Made In Canada.
+
+PUSH ACTIVATED PUMP: Simply push down on the pump and a heavy stream of cleaner water will blast upward. This allows you to scrub and pump away the debris safely under the Dirt Lock bucket filter.
+
+ATTACHES INTO DIRT LOCK BUCKET FILTER: The Dirt Lock bucket filter allows you to attach the scrub and pump or any of our other detailing tools when needed. When you're finished, simply detach it!
+
+OUR MOST ADVANCED BUCKET FILTERING SYSTEM: The Dirt Lock bucket filter is extremely powerful on its own. With the addition of our scrub and pump attachment, it takes the product to another level by flushing out your wash mitt and tools more thoroughly, resulting in even cleaner wash media and the ability to cycle the debris even quicker underneath the screen with the added pump system.`,
     price: 16.99,
     category: 'Detailing-Accessories',
-    image: 'https://m.media-amazon.com/images/I/61P-hSN61ML._AC_SY300_SX300_QL70_FMwebp_.jpg',
-    images: ['https://m.media-amazon.com/images/I/61P-hSN61ML._AC_SY300_SX300_QL70_FMwebp_.jpg'],
-    features: [
-      'Active Pumping Action',
-      'Ensures Clean Mitt',
-      'Attaches to Dirt Lock',
-      'Durable Construction',
-      'Patented Technology'
+    image: dirtLockScrubPumpBlack,
+    images: [
+      dirtLockScrubPumpBlack,
+      dirtLockScrubPumpWhite,
     ],
-    compatibility: ['Dirt Lock Filter'],
-    rating: 4.7,
-    reviewCount: 412,
+    features: [
+      'Use in your wash bucket to clean your mitt as you dunk!',
+      'Soft rounded scrubbing ridges allow you to scrub and pump away debris!',
+      'Works perfectly with wash mitts, brushes, hand applicators and more!',
+      'The ultimate scratch-protection system for your vehicle!',
+      'Patented venturi spring design pumps clean water into your wash mitt, brushes, hand applicators and more, then traps the unwanted debris!',
+    ],
+    compatibility: ['Dirt Lock Bucket Filter', 'Wash Mitts', 'Brushes', 'Hand Applicators'],
+    rating: 4.5,
+    reviewCount: 235,
+    badge: 'Premium',
     inStock: true,
-    url: "https://www.amazon.com/DETAIL-GUARDZ-Attachment-Bucket-Filter/dp/B08FTK9PJJ?ref_=ast_sto_dp&th=1",
+    url: "https://www.amazon.com/DETAIL-GUARDZ-Attachment-Bucket-Filter/dp/B08FTK9PJJ",
     brand: "DETAIL GUARDZ",
-    specifications: DEFAULT_SPECIFICATIONS,
+    specifications: {
+      brand: "DETAIL GUARDZ",
+      material: "Plastic (High-Strength Resin)",
+      weight: "9.2 ounces",
+      dimensions: '7.28"L x 6.5"W x 4.33"H',
+      manufacturer: "DETAIL GUARDZ Canada",
+    },
+    colorOptions: [
+      { name: 'White', value: 'white', image: dirtLockScrubPumpWhite, price: 16.99 },
+      { name: 'Black', value: 'black', image: dirtLockScrubPumpBlack, price: 16.99 },
+
+    ],
     videos: {
       main: {
         url: "https://www.youtube.com/embed/2S1_ebwMuZs",
@@ -274,79 +400,159 @@ export const products: Product[] = [
       additional: []
     },
     reviews: DEFAULT_REVIEWS,
-    ratingBreakdown: DEFAULT_RATING_BREAKDOWN,
+    ratingBreakdown: [
+      { stars: 5, percentage: 65, count: 153 },
+      { stars: 4, percentage: 17, count: 40 },
+      { stars: 3, percentage: 9, count: 21 },
+      { stars: 2, percentage: 5, count: 12 },
+      { stars: 1, percentage: 4, count: 9 },
+    ],
     country: null
   },
   {
     id: 'Pad-Washer-System',
-    name: 'Dirt Lock Pad Washer System Attachment with Spray Cleaner (Black)',
+    name: 'The Detail Guardz - Dirt Lock Pad Washer System Attachment with Spray Cleaner (Black)',
     slug: 'dirt-lock-pad-washer-attachment',
-    description: 'The Pad Washer System allows you to clean your polishing pads quickly and easily using your bucket.',
-    longDescription: 'The Detail Guardz Pad Washer System is the most efficient way to clean your polishing pads. It uses the Dirt Lock\'s pulse technology to deep clean your pads without damaging them. The kit includes a specialized spray cleaner to help break down old wax and polish.',
-    price: 79.99,
+    description: 'SEMA Award-winning pad washer system that clicks into your Dirt Lock bucket filter — cleans all polishing pads from 1" to 10" safely and gently within seconds using the patented Venturi spring design.',
+    longDescription: `DETAIL GUARDZ DIRT LOCK PAD WASHER SYSTEM ATTACHMENT
+
+The Dirt Lock pad washer attachment clicks into your Dirt Lock bucket filter to clean any polishing pads safely and gently within seconds! Clean your foam, wool, microfiber, buffing bonnets and more within the blink of an eye.
+
+HOW TO USE: Simply insert the pad washer attachment into your Dirt Lock bucket filter and place into a bucket with clean water. Attach your dirty pads onto the supplied hook and loop handle and pump up and down on the attachment for about 15-20 seconds. Clean water will blast inside the pad and flush out any unwanted chemicals to create a perfectly clean polishing pad!
+
+WORKS WITH ANY 1" TO 10" PADS: The Dirt Lock pad washer system will quickly and gently clean any polishing pad from 1 inch all the way to 10 inches. This system replicates a gentle hand wash, so it does not tear or damage your polishing pad.
+
+SEMA AWARD WINNING: The Dirt Lock pad washer system works so well it won the SEMA global media awards! Feel confident knowing you are receiving a rigorously tested and proven pad washer system that will last for years!
+
+The Dirt Lock pad washer attachment is made from industrial grade plastic and metal for extreme durability. Proudly Made In Canada.`,
+    price: 58.99,
+    originalPrice: null,
     category: 'Detailing-Accessories',
-    image: 'https://m.media-amazon.com/images/I/710cuaz8RzS._AC_SY300_SX300_QL70_FMwebp_.jpg',
-    images: ['https://m.media-amazon.com/images/I/710cuaz8RzS._AC_SY300_SX300_QL70_FMwebp_.jpg'],
-    features: [
-      'Professional Pad Cleaning',
-      'Works with Dual Action Polishers',
-      'Environmentally Friendly',
-      'Includes Pad Cleaner Spray',
-      'Attaches to Dirt Lock'
+    image: padWasherBlackWithCleaner,
+    images: [
+      padWasherBlackWithCleaner,
+      padWasherWhiteWithCleaner,
+      padWasherBlack,
+      padWasherWhite,
     ],
-    compatibility: ['Dirt Lock Filter', 'All Polishing Pads'],
-    rating: 4.6,
-    reviewCount: 234,
+    features: [
+      'Patented venturi spring design pumps clean water into your buffing pads and squeezes out the dirty chemicals several times per second. Dramatically extends the pad life!',
+      'Gently cleans polishing pads within 10-15 seconds. Attaches into your Dirt Lock bucket filter (Sold separately).',
+      'Includes a storage bracket to neatly hang the kit when finished!',
+      'Cleans polishing pads gently and extremely quick! Good for ALL microfiber, foam, wool and other polishing pads from 1-10 inches!',
+      'Includes a 650ML bottle of our pad cleaner solution!',
+    ],
+    compatibility: ['Dirt Lock Bucket Filter', 'All Polishing Pads 1"–10"', 'Foam Pads', 'Wool Pads', 'Microfiber Pads'],
+    rating: 3.9,
+    reviewCount: 68,
+    badge: 'Popular',
     inStock: true,
-    url: "https://www.amazon.com/Detail-Guardz-Washer-Attachment-Cleaner/dp/B07VGMKW7S?ref_=ast_sto_dp&th=1",
+    url: "https://www.amazon.com/dp/B07VGMKW7S",
     brand: "DETAIL GUARDZ",
-    specifications: DEFAULT_SPECIFICATIONS,
+    specifications: {
+      brand: "DETAIL GUARDZ",
+      material: "Industrial Grade Plastic & Metal",
+      weight: "3.31 pounds",
+      dimensions: '8"L x 8"W x 15"H',
+      manufacturer: "DETAIL GUARDZ Canada",
+    },
+    colorOptions: [
+      { name: 'Black + Cleaner', value: 'black-cleaner', image: padWasherBlackWithCleaner, price: 58.99 },
+      { name: 'White + Cleaner', value: 'white-cleaner', image: padWasherWhiteWithCleaner, price: 58.99 },
+      { name: 'Black', value: 'black', image: padWasherBlack, price: 49.99 },
+      { name: 'White', value: 'white', image: padWasherWhite, price: 49.99 },
+    ],
     videos: {
       main: {
         url: "https://www.youtube.com/embed/rmmq1jVdY40",
-        title: "How To PROPERLY Clean Pads",
-        description: "Extend the life of your polishing pads with the Dirt Lock Pad Washer. See the pro procedure here."
+        title: "Detail Guardz Dirt Lock Pad Washer",
+        description: "See how the SEMA Award-winning Dirt Lock Pad Washer System cleans your polishing pads safely and gently in seconds."
       },
       additional: []
     },
     reviews: DEFAULT_REVIEWS,
-    ratingBreakdown: DEFAULT_RATING_BREAKDOWN,
+    ratingBreakdown: [
+      { stars: 5, percentage: 44, count: 30 },
+      { stars: 4, percentage: 16, count: 11 },
+      { stars: 3, percentage: 10, count: 7 },
+      { stars: 2, percentage: 10, count: 7 },
+      { stars: 1, percentage: 20, count: 13 },
+    ],
     country: null
   },
   {
     id: 'Hose-Roller-4pk',
-    name: '4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Black)',
+    name: 'DETAIL GUARDZ Hose Guide – 4pcs Plastic Hose Roller for Cars, Trucks & Motorcycles - Car Wheel Rolling System Tool Preventing Stucking and Snagging Under Tires (Yellow)',
     slug: 'hose-roller-4-pack',
-    description: 'Prevent your hose from getting stuck under your tires with these innovative rollers.',
-    longDescription: 'Stop the frustration of your hose getting caught under your tires while washing your car. These hose rollers slide under your tires and provide a smooth rolling surface for your hose to glide across. The 4-pack ensures you have one for every tire.',
+    description: 'Tire-mounted hose rollers that slide under your vehicle to prevent hose & cord snags while detailing — universal fit with secure locking grip, 4-pack, made in Canada.',
+    longDescription: `DETAIL GUARDZ CAR HOSE GUIDES
+
+Using a set of Detail Guardz is the most efficient way to work around your vehicle without being interrupted by stubborn hose & cord jams. The roller system allows for effortless movements without the need to tug and adjust your equipment. This unique tool has a locking mechanism to instantly grip onto the tire to keep it firmly in place. Quickly slide the Detail Guardz underneath your tires and forget about your hoses and cords getting caught!
+
+LINE GUIDANCE: If a hose or cable slides above the Detail Guardz, it is guided down the rounded tip and back onto the roller. This ensures you are never interrupted!
+
+UNIVERSAL FIT: The Detail Guardz car hose guides will fit just about any size tire!
+
+MADE IN CANADA: Detail Guardz are manufactured in Canada from industrial grade plastic and metal. Each unit is hand checked for the highest standards of quality!
+
+ANTI-JAM: You can have several cables or hoses running at the same time and it will still work perfectly! The 2 rollers are independently spinning and therefore never jam-up!`,
     price: 19.99,
+    originalPrice: null,
     category: 'Detailing-Accessories',
-    image: 'https://m.media-amazon.com/images/I/61w2m+bKp8L._AC_SX466_.jpg',
-    images: ['https://m.media-amazon.com/images/I/61w2m+bKp8L._AC_SX466_.jpg'],
-    features: [
-      'Anti-Jam Roller System',
-      'Universal Fit',
-      'Sturdy Construction',
-      'Easy to Install',
-      'Set of 4'
+    image: hoseRollerBlack,
+    images: [
+      hoseRollerBlack,
+      hoseRollerBlackOld,
+      hoseRollerBlue,
+      hoseRollerNeon,
+      hoseRollerRed,
+      hoseRollerYellow,
     ],
-    compatibility: ['All Vehicles', 'Cars', 'Trucks', 'Motorcycles'],
+    features: [
+      'PREVENT HOSE & CORD SNAGS: Slide these tire-mounted rollers under your vehicle and avoid tangled hoses or cords while detailing. The locking mechanism grips tires firmly, allowing smooth movement around wheels.',
+      'UNIVERSAL FIT FOR ALL TIRES: Engineered to fit every car, truck, and motorcycle tire, these hose guides ensure full vehicle coverage — ideal for driveways, workshops, and mobile detailing.',
+      'FAST SETUP WITH TIRE-LOCK GRIPS: Equipped with secure tire-locking tabs and angled entry design for quick, slip-free placement. Stays firmly under the tire during heavy use.',
+      'SPACE-SAVING SNAP STORAGE: Each pack includes four pieces that interlock for neat storage and quick deployment — effortless and organized.',
+      'INDUSTRIAL-GRADE DURABILITY: Constructed from robust, high-quality industrial plastic, built to withstand repeated use, outdoor conditions, and heavy equipment without cracking or fading.',
+    ],
+    compatibility: ['All Cars', 'Trucks', 'Motorcycles', 'All Tire Sizes'],
     rating: 4.6,
-    reviewCount: 234,
+    reviewCount: 2777,
+    badge: 'Premium',
     inStock: true,
-    url: "https://www.amazon.com/DETAIL-GUARDZ-Hose-Guide-Motorcycles/dp/B0FHKTM2YW?ref_=ast_sto_dp&th=1",
+    url: "https://www.amazon.com/dp/B0FHKV4JZT",
     brand: "DETAIL GUARDZ",
-    specifications: DEFAULT_SPECIFICATIONS,
+    specifications: {
+      brand: "DETAIL GUARDZ",
+      material: "Industrial Grade Plastic",
+      weight: "7.8 ounces",
+      dimensions: '13.39"L x 4.53"W x 2.95"H',
+      manufacturer: "DETAIL GUARDZ Canada",
+    },
+    colorOptions: [
+      { name: 'Black', value: 'black', image: hoseRollerBlack, price: 19.99 },
+      { name: 'Black (Old)', value: 'black-old', image: hoseRollerBlackOld, price: 19.99 },
+      { name: 'Blue', value: 'blue', image: hoseRollerBlue, price: 19.99 },
+      { name: 'Neon', value: 'neon', image: hoseRollerNeon, price: 19.99 },
+      { name: 'Red', value: 'red', image: hoseRollerRed, price: 19.99 },
+      { name: 'Yellow', value: 'yellow', image: hoseRollerYellow, price: 19.99 },
+    ],
     videos: {
       main: {
         url: "https://www.youtube.com/embed/2S1_ebwMuZs",
-        title: "Snag-Free Detailing Hack",
-        description: "Stop fighting your hose! See how the Detail Guardz Hose Roller keeps your wash flowing smoothly."
+        title: "Snag-Free Detailing with Detail Guardz",
+        description: "Stop fighting your hose! See how the Detail Guardz Hose Guide keeps your wash flowing smoothly with its anti-jam roller system."
       },
       additional: []
     },
     reviews: DEFAULT_REVIEWS,
-    ratingBreakdown: DEFAULT_RATING_BREAKDOWN,
+    ratingBreakdown: [
+      { stars: 5, percentage: 72, count: 2000 },
+      { stars: 4, percentage: 14, count: 389 },
+      { stars: 3, percentage: 6, count: 167 },
+      { stars: 2, percentage: 3, count: 83 },
+      { stars: 1, percentage: 5, count: 138 },
+    ],
     country: null
   },
   {
@@ -369,6 +575,7 @@ export const products: Product[] = [
     compatibility: ['3-8 Gallon Round Pails'],
     rating: 4.6,
     reviewCount: 234,
+    badge: 'Premium',
     inStock: true,
     url: "https://www.amazon.com/DETAIL-GUARDZ-Washer-Bundle-Complete/dp/B088WZ9STB?ref_=ast_sto_dp",
     brand: "DETAIL GUARDZ",

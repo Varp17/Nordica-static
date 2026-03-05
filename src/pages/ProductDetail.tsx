@@ -22,7 +22,9 @@ const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const [addedToCart, setAddedToCart] = useState(false);
     const [selectedImage, setSelectedImage] = useState(0);
-    const [selectedColor, setSelectedColor] = useState('blue');
+    const [selectedColor, setSelectedColor] = useState(
+        product?.colorOptions?.[0]?.value ?? 'default'
+    );
     const [showMoreDetails, setShowMoreDetails] = useState(false);
     const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
@@ -63,39 +65,10 @@ const ProductDetail = () => {
         );
     }
 
-    // Color options with actual product images
-    const colorOptions = [
-        {
-            name: 'Black',
-            value: 'black',
-            image: product.image,
-            price: product.price
-        },
-        {
-            name: 'Blue',
-            value: 'blue',
-            image: product.image,
-            price: product.price
-        },
-        {
-            name: 'Gold',
-            value: 'gold',
-            image: product.image,
-            price: product.price + 5
-        },
-        {
-            name: 'Red',
-            value: 'red',
-            image: product.image,
-            price: product.price
-        },
-        {
-            name: 'Silver',
-            value: 'silver',
-            image: product.image,
-            price: product.price + 3
-        },
-    ];
+    // Use product-specific color options if available, else default to a single option
+    const colorOptions = product.colorOptions && product.colorOptions.length > 0
+        ? product.colorOptions
+        : [{ name: 'Default', value: 'default', image: product.image, price: product.price }];
 
     const productImages = product.images || [product.image, product.image, product.image, product.image, product.image];
 
@@ -125,9 +98,10 @@ const ProductDetail = () => {
 
     const handleColorChange = (colorValue: string) => {
         setSelectedColor(colorValue);
-        const colorOption = colorOptions.find(c => c.value === colorValue);
-        if (colorOption) {
-            setSelectedImage(0);
+        // Find this color's image and sync the main image display
+        if (product.colorOptions) {
+            const colorIndex = product.colorOptions.findIndex(c => c.value === colorValue);
+            if (colorIndex !== -1) setSelectedImage(colorIndex);
         }
     };
 
@@ -161,9 +135,11 @@ const ProductDetail = () => {
                             {/* Main Image */}
                             <div className="relative aspect-square bg-gray-50 rounded-lg overflow-hidden border border-border">
                                 <img
-                                    src={productImages[selectedImage]}
-                                    alt={product.name}
-                                    className="w-full h-full object-contain p-8"
+                                    src={product.colorOptions && product.colorOptions.length > 0
+                                        ? selectedColorOption.image
+                                        : productImages[selectedImage]}
+                                    alt={`${product.name} - ${selectedColorOption.name}`}
+                                    className="w-full h-full object-contain p-8 transition-all duration-300"
                                 />
                                 {product.badge && (
                                     <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
@@ -211,7 +187,7 @@ const ProductDetail = () => {
                                 <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2 leading-tight">
                                     {product.name}
                                 </h1>
-                                <Link to={`/brand/${product.brand.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm text-primary hover:underline">
+                                <Link to="/" className="text-sm text-primary hover:underline">
                                     Visit the {product.brand} Store
                                 </Link>
                             </div>

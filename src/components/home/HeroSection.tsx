@@ -82,12 +82,11 @@ to-black/10
               </div>
 
               {/* Trust badges - Hidden on mobile */}
-              <div className="hidden lg:block mt-10 pt-8 border-t border-white/10 opacity-0 animate-fade-up animation-delay-400">
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-background/60 text-sm">
-                  <div className="flex items-center gap-2">
+              <div className="hidden lg:block mt-10 pt-8 opacity-0 animate-fade-up animation-delay-400">                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-background/60 text-sm">
+                <div className="flex items-center gap-2">
 
-                  </div>
-                  {/* <div className="flex items-center gap-2">
+                </div>
+                {/* <div className="flex items-center gap-2">
                     <div className="h-2 w-2 rounded-full bg-primary" />
                     100% Satisfaction
                   </div>
@@ -95,7 +94,7 @@ to-black/10
                     <div className="h-2 w-2 rounded-full bg-primary" />
                     Canadian Owned
                   </div> */}
-                </div>
+              </div>
               </div>
             </div>
 

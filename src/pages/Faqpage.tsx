@@ -1,31 +1,33 @@
 import { useState } from "react";
-import { ChevronDown, Package, CreditCard, Truck, RefreshCw, Shield, HelpCircle, MessageCircle, Mail } from "lucide-react";
+import { ChevronDown, Package, CreditCard, Truck, RefreshCw, Shield, HelpCircle, MessageCircle, Mail, MapPin } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import { Link } from "react-router-dom";
 
-const faqCategories = [
+// ─── USA FAQ Data ──────────────────────────────────────────────────────────────
+const usFaqCategories = [
   {
     icon: Package,
     title: "Orders & Products",
     questions: [
       {
         question: "How do I place an order?",
-        answer: "Simply browse our products, add items to your cart, and proceed to checkout. You'll need to create an account or checkout as a guest. Fill in your shipping information, select your payment method, and confirm your order. You'll receive an email confirmation immediately."
+        answer: "Browse our products on amazon.com, add items to your cart, and proceed to checkout. All US orders are fulfilled via Amazon Multi-Channel Fulfilment. You'll receive an email confirmation immediately after your purchase."
       },
       {
         question: "Can I modify or cancel my order after placing it?",
-        answer: "You can modify or cancel your order within 2 hours of placing it by contacting our customer service team immediately. After this window, orders are processed and shipped quickly, so modifications may not be possible. If your order has already shipped, you'll need to wait to receive it and then initiate a return."
+        answer: "Orders can only be cancelled before they enter Amazon's fulfilment network. Once fulfilled, cancellation is not possible. Contact support@detailguardz.com as soon as possible if you need to cancel."
       },
       {
         question: "Do you offer bulk or wholesale pricing?",
-        answer: "Yes! We offer special pricing for bulk orders and professional detailers. Please contact our sales team at wholesale@detailguardz.com with details about your needs, and we'll provide you with a custom quote."
+        answer: "Yes! We offer special pricing for bulk orders and professional detailers. Contact our sales team at wholesale@detailguardz.com with your requirements and we'll provide a custom quote."
       },
       {
         question: "Are your products safe for all vehicle types?",
-        answer: "Our products are designed to be safe for all vehicle types when used as directed. Each product page includes specific usage instructions and compatibility information. If you have a unique vehicle or specific concerns, please contact us for personalized recommendations."
+        answer: "Our products are designed to be safe for all vehicle types when used as directed. Each product page includes specific usage instructions and compatibility information. Contact us for personalized recommendations."
       },
       {
-        question: "How do I know which products are right for my car?",
-        answer: "Each product page includes detailed descriptions, usage scenarios, and recommendations. We also have buying guides and how-to articles on our blog. If you're still unsure, our customer service team can help you choose the perfect products for your specific needs."
+        question: "Where are DETAIL GUARDZ products manufactured?",
+        answer: "All DETAIL GUARDZ products are proudly designed and manufactured in Canada using industrial-grade materials. They meet rigorous quality standards and are trusted by professional detailers worldwide."
       }
     ]
   },
@@ -34,24 +36,24 @@ const faqCategories = [
     title: "Shipping & Delivery",
     questions: [
       {
-        question: "What are your shipping rates and delivery times?",
-        answer: "We offer FREE shipping on orders over $75. Standard shipping (3-5 business days) is $9.99, and Express shipping (1-2 business days) is $24.99. Orders are processed within 24 hours on business days. Remote areas may require additional 1-2 days for delivery."
+        question: "What are the shipping options for US orders?",
+        answer: "US orders are fulfilled via Amazon Multi-Channel Fulfilment. Standard delivery typically takes 3–7 business days. Expedited options (1–3 business days) may be available at checkout depending on your location."
       },
       {
-        question: "Do you ship internationally?",
-        answer: "Currently, we only ship within Canada. We're working on expanding our shipping coverage to include the United States and other countries. Sign up for our newsletter to be notified when international shipping becomes available."
+        question: "Do you offer free shipping?",
+        answer: "Free shipping is available on qualifying Amazon orders over $35. Prime members enjoy free delivery on eligible orders. See product pages on Amazon for current shipping offers."
       },
       {
         question: "How can I track my order?",
-        answer: "Once your order ships, you'll receive an email with a tracking number and link. You can also track your order by logging into your account and viewing your order history. If you don't receive tracking information within 48 hours, please contact us."
+        answer: "Once your order ships, you'll receive an email with a tracking number and a link. Tracking updates are managed through the assigned carrier (UPS, USPS, FedEx, etc.). If you don't receive tracking info within 48 hours, please contact us."
       },
       {
         question: "What if my package is lost or damaged during shipping?",
-        answer: "If your package is lost or arrives damaged, please contact us immediately with your order number and photos (if damaged). We'll work with the carrier to resolve the issue and will send you a replacement or provide a full refund at no additional cost."
+        answer: "If your package is lost or arrives damaged, contact us within 7 days at support@detailguardz.com with your order number and photos. We'll work with Amazon and the carrier to arrange a replacement or full refund."
       },
       {
         question: "Can I change my shipping address after ordering?",
-        answer: "If your order hasn't shipped yet, contact us immediately and we'll update the address. Once shipped, we cannot change the address, but you may be able to redirect the package through the carrier's website using your tracking number."
+        answer: "Orders are shipped to the address entered at checkout. We cannot modify the shipping address once the order has entered Amazon's fulfilment process. Please double-check your address before confirming your order."
       }
     ]
   },
@@ -61,23 +63,19 @@ const faqCategories = [
     questions: [
       {
         question: "What payment methods do you accept?",
-        answer: "We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Shop Pay. All payments are processed securely through encrypted connections."
+        answer: "All US orders are processed through Amazon. Amazon accepts major credit/debit cards (Visa, Mastercard, Amex, Discover), Amazon Pay, PayPal, Apple Pay, Google Pay, and Buy Now Pay Later options. All prices are in USD ($)."
       },
       {
         question: "Is my payment information secure?",
-        answer: "Absolutely. We use industry-standard SSL encryption to protect your payment information. We never store your complete credit card details on our servers. All transactions are processed through secure, PCI-compliant payment gateways."
+        answer: "Yes. All transactions are processed through Amazon's secure, PCI-compliant payment system with SSL encryption. DETAIL GUARDZ never directly stores your payment details."
       },
       {
         question: "Do you offer any discounts or promotions?",
-        answer: "Yes! We regularly offer promotions, seasonal sales, and exclusive discounts to newsletter subscribers. Follow us on social media and sign up for our newsletter to stay informed about current deals and upcoming sales events."
+        answer: "Yes! We regularly run promotions on Amazon, including Lightning Deals and coupons. Follow us on social media and check our Amazon store page for the latest deals and seasonal sales."
       },
       {
-        question: "Can I use multiple discount codes on one order?",
-        answer: "Typically, only one discount code can be used per order unless specifically stated otherwise. The system will automatically apply the discount that gives you the best savings. Some promotions cannot be combined with other offers."
-      },
-      {
-        question: "Why was I charged a different amount than expected?",
-        answer: "The final amount includes product costs, shipping fees, and applicable taxes. Taxes are calculated based on your shipping address. If you notice an error, please contact us with your order number and we'll review the charges immediately."
+        question: "Are prices in USD?",
+        answer: "Yes, all prices on the US website (detailguardz.com and our Amazon US storefront) are displayed in US Dollars (USD). For Canadian pricing in CAD, visit our Canada store at detailguardz.ca."
       }
     ]
   },
@@ -86,50 +84,38 @@ const faqCategories = [
     title: "Returns & Refunds",
     questions: [
       {
-        question: "What is your return policy?",
-        answer: "We offer a 30-day return policy on unused items in original packaging. To initiate a return, contact our customer service team for a Return Authorization number. You're responsible for return shipping costs unless the item is defective or we made an error."
+        question: "What is your return policy for US orders?",
+        answer: "US orders are eligible for a FREE 30-day return/replacement through Amazon. The item must be unused and in its original packaging. Initiate a return through your Amazon account or contact us at support@detailguardz.com."
       },
       {
         question: "How long does it take to receive my refund?",
-        answer: "Once we receive and inspect your return, we'll process your refund within 5-7 business days. The refund will be issued to your original payment method. Please allow an additional 5-10 business days for the refund to appear in your account, depending on your bank or card issuer."
+        answer: "Once we receive and inspect your return, refunds are processed within 5–7 business days. Allow an additional 5–10 business days for the refund to appear in your account depending on your bank or card issuer."
+      },
+      {
+        question: "What if I receive a defective or incorrect item?",
+        answer: "Contact us within 5 days of delivery at support@detailguardz.com with your order number and clear photos of the product and packaging. We'll arrange a replacement or full refund at no additional cost — including return shipping."
       },
       {
         question: "Can I return opened or used products?",
-        answer: "We cannot accept returns on opened or used products unless they are defective or damaged. This policy helps us maintain product quality and hygiene standards. If you're unsure about a product, please contact us before opening it."
-      },
-      {
-        question: "What if I receive the wrong item or a defective product?",
-        answer: "If you receive the wrong item or a defective product, please contact us within 48 hours of delivery with photos. We'll arrange for a replacement or full refund immediately, and we'll cover all return shipping costs. Your satisfaction is our priority."
-      },
-      {
-        question: "Do you offer exchanges?",
-        answer: "We currently don't offer direct exchanges. If you need a different product, please return the original item for a refund and place a new order for the item you want. This ensures you get exactly what you need as quickly as possible."
+        answer: "We cannot accept returns on opened or used products unless they are defective or damaged. Opened detailing chemicals, used microfiber products, and final sale items are non-returnable."
       }
     ]
   },
   {
     icon: Shield,
-    title: "Account & Privacy",
+    title: "Warranty & Support",
     questions: [
       {
-        question: "Do I need to create an account to place an order?",
-        answer: "No, you can checkout as a guest. However, creating an account allows you to track orders, save shipping addresses, view order history, and receive exclusive offers. It makes future purchases faster and easier."
+        question: "Do your products come with a warranty?",
+        answer: "DETAIL GUARDZ products are backed by Amazon's Voluntary 30-Day Return Guarantee. For manufacturing defects discovered after 30 days, contact support@detailguardz.com and we'll evaluate on a case-by-case basis."
       },
       {
-        question: "How do I reset my password?",
-        answer: "Click on 'Sign In' and then select 'Forgot Password.' Enter your email address, and we'll send you a password reset link. If you don't receive the email within a few minutes, check your spam folder or contact us for assistance."
+        question: "How do I contact US customer support?",
+        answer: "Email us at support@detailguardz.com or call 1-800-410-6311 (Mon–Fri: 9 AM–6 PM EST, Sat: 10 AM–4 PM EST). For Amazon-related issues you can also use Amazon's messaging system on the order page."
       },
       {
-        question: "How is my personal information used?",
-        answer: "We use your information solely to process orders, communicate about your purchases, and improve your shopping experience. We never sell your personal information to third parties. For complete details, please review our Privacy Policy."
-      },
-      {
-        question: "How can I unsubscribe from marketing emails?",
-        answer: "Every marketing email includes an 'Unsubscribe' link at the bottom. Click it to be removed from our mailing list immediately. You can also manage your email preferences in your account settings. Note that you'll still receive important order-related emails."
-      },
-      {
-        question: "Can I delete my account?",
-        answer: "Yes, you can request account deletion by contacting our customer service team. We'll permanently delete your account and personal information within 30 days, except for information we're required to retain for legal or regulatory purposes."
+        question: "Where can I find tutorials and usage guides?",
+        answer: "Visit our YouTube channel and the product video sections on each product page. We have detailed how-to guides, professional tips, and installation videos for every product in our lineup."
       }
     ]
   },
@@ -139,45 +125,175 @@ const faqCategories = [
     questions: [
       {
         question: "Are your products eco-friendly?",
-        answer: "Many of our products are biodegradable and environmentally safe. We're committed to offering eco-friendly options that don't compromise on performance. Look for the 'Eco-Friendly' badge on product pages for verified green products."
+        answer: "DETAIL GUARDZ are committed to responsible manufacturing. Our products are made from industrial-grade, durable materials designed to last for years — reducing waste from disposable alternatives. Our pad cleaners are biodegradable."
       },
       {
-        question: "Do you test your products?",
-        answer: "Yes, every product is tested and approved by professional detailers before we add it to our catalog. We ensure that each product meets our high standards for quality, safety, and effectiveness."
+        question: "Are DETAIL GUARDZ products compatible with all bucket sizes?",
+        answer: "The Dirt Lock Car Wash Insert fits standard 3–8 gallon round pails with a base diameter between 10.2–10.72 inches. All attachments (Scrub Wall, Scrub & Pump) are designed to snap directly into the Dirt Lock base."
       },
       {
-        question: "How should I store car care products?",
-        answer: "Store products in a cool, dry place away from direct sunlight and extreme temperatures. Keep them out of reach of children and pets. Always ensure lids are tightly closed. Check individual product labels for specific storage instructions."
-      },
-      {
-        question: "What's the shelf life of your products?",
-        answer: "Most of our products have a shelf life of 2-3 years when stored properly. Each product label includes a manufacturing date or expiration date. If you're unsure about a product's freshness, contact us with the batch number and we'll verify it for you."
-      },
-      {
-        question: "Do you offer product tutorials or guides?",
-        answer: "Yes! We have a comprehensive resource library with how-to videos, detailed guides, and tips from professional detailers on our blog and YouTube channel. Each product page also includes usage instructions and best practices."
+        question: "How should I store my DETAIL GUARDZ products?",
+        answer: "Store products in a cool, dry place away from direct sunlight and extreme temperatures. All plastic components are UV-resistant and built for long-term durability. No special storage required for hardware components."
       }
     ]
   }
 ];
 
-function FAQItem({ question, answer, isOpen, onClick }) {
+// ─── Canada FAQ Data ───────────────────────────────────────────────────────────
+const caFaqCategories = [
+  {
+    icon: Package,
+    title: "Orders & Products",
+    questions: [
+      {
+        question: "How do I place an order in Canada?",
+        answer: "Browse and purchase directly on our Canadian website at detailguardz.ca, or through our Amazon.ca storefront. Add items to cart and proceed to checkout. You'll receive an order confirmation email immediately."
+      },
+      {
+        question: "Can I modify or cancel my Canadian order after placing it?",
+        answer: "Orders may only be cancelled before they enter our fulfilment process. Contact us immediately at support@detailguardz.ca if you need to cancel. Once dispatched, cancellation is not possible — you may initiate a return after delivery."
+      },
+      {
+        question: "Do you offer bulk or wholesale pricing for Canadian customers?",
+        answer: "Yes! Special pricing is available for Canadian detailing businesses and bulk orders. Contact wholesale@detailguardz.ca with your requirements and volume, and our team will provide a custom quote in CAD."
+      },
+      {
+        question: "Are DETAIL GUARDZ products made in Canada?",
+        answer: "Yes! All DETAIL GUARDZ products are proudly designed and manufactured in Canada. We use industrial-grade materials and every unit is hand-checked for quality before shipping."
+      },
+      {
+        question: "Are prices in Canadian dollars?",
+        answer: "Yes, all prices on detailguardz.ca are displayed in Canadian Dollars (CAD). For US pricing in USD, visit detailguardz.com or our Amazon US storefront."
+      }
+    ]
+  },
+  {
+    icon: Truck,
+    title: "Shipping & Delivery",
+    questions: [
+      {
+        question: "What are the shipping options for Canadian orders?",
+        answer: "Canadian orders are shipped via major carriers including Canada Post, UPS, Purolator, and other logistics partners. Standard delivery is 3–10 business days. Expedited options are available at checkout depending on your postal code."
+      },
+      {
+        question: "Do you offer free shipping within Canada?",
+        answer: "Free shipping thresholds and options vary by promotion. Check detailguardz.ca and our Amazon.ca listing for current free-shipping offers. Remote and rural postal codes may require additional transit time."
+      },
+      {
+        question: "Do you ship to rural or remote areas of Canada?",
+        answer: "Yes, we ship Canada-wide. Rural and remote locations (including Northern Canada) may require 1–5 additional business days beyond standard estimates. Contact us at support@detailguardz.ca for specific postal code estimates."
+      },
+      {
+        question: "How can I track my Canadian order?",
+        answer: "Once your order ships, you'll receive an email with a tracking number and link managed by the assigned carrier. If you haven't received tracking info within 48 hours of your ship confirmation, contact support@detailguardz.ca."
+      },
+      {
+        question: "Are there customs duties or taxes on Canadian orders?",
+        answer: "Orders shipped within Canada do not incur customs duties. Applicable provincial and federal taxes (HST/GST/PST) will be calculated and displayed at checkout based on your shipping province."
+      }
+    ]
+  },
+  {
+    icon: CreditCard,
+    title: "Payment & Pricing",
+    questions: [
+      {
+        question: "What payment methods do you accept in Canada?",
+        answer: "Canadian orders via detailguardz.ca or Amazon.ca accept major credit/debit cards (Visa, Mastercard, Amex), PayPal, Amazon Pay, and other available digital wallets. All prices are in Canadian Dollars (CAD)."
+      },
+      {
+        question: "Is my payment information secure?",
+        answer: "Yes. All transactions are processed through SSL-encrypted, PCI-compliant payment gateways. DETAIL GUARDZ never stores your complete payment details on our servers."
+      },
+      {
+        question: "Do you offer any Canadian promotions or discounts?",
+        answer: "Yes! We run seasonal promotions, bundle deals, and exclusive discounts for Canadian customers. Follow us on social media and sign up for our newsletter at detailguardz.ca to stay informed."
+      },
+      {
+        question: "Will I be charged in CAD?",
+        answer: "Yes, all Canadian store transactions are in CAD. If you accidentally order from our US storefront, you may be charged in USD and subject to cross-border fees — make sure to shop at detailguardz.ca for CAD pricing."
+      }
+    ]
+  },
+  {
+    icon: RefreshCw,
+    title: "Returns & Refunds",
+    questions: [
+      {
+        question: "What is the return policy for Canadian orders?",
+        answer: "Canadian orders are eligible for a 30-day return policy. Items must be unused and in original packaging. Contact support@detailguardz.ca to receive a Return Authorization number before shipping anything back."
+      },
+      {
+        question: "Who pays for return shipping in Canada?",
+        answer: "Customers are responsible for return shipping costs unless the item is defective, damaged, or incorrect. In those cases, we cover all return shipping costs. Contact us within 5 days of delivery with photos."
+      },
+      {
+        question: "How long does a Canadian refund take?",
+        answer: "Once we receive and inspect your return, refunds are processed within 5–10 business days. Allow an additional 5–10 business days for the refund to appear, depending on your bank or card issuer."
+      },
+      {
+        question: "What if I receive a defective or incorrect item?",
+        answer: "Contact support@detailguardz.ca within 5 days of delivery with your order number and clear photos. We'll arrange a replacement or full refund at no additional cost, and cover all return shipping."
+      }
+    ]
+  },
+  {
+    icon: Shield,
+    title: "Warranty & Support",
+    questions: [
+      {
+        question: "Do Canadian products come with a warranty?",
+        answer: "Yes. Canadian orders include a FREE 30-day refund/replacement guarantee. For manufacturing defects discovered after 30 days, email support@detailguardz.ca and we'll evaluate on a case-by-case basis."
+      },
+      {
+        question: "How do I contact Canadian customer support?",
+        answer: "Email us at support@detailguardz.ca. Our team is available Monday–Friday: 9 AM–6 PM EST, Saturday: 10 AM–4 PM EST. You can also reach us through the contact form at detailguardz.ca/contact."
+      },
+      {
+        question: "Is there a physical store in Canada?",
+        answer: "We are an online-first brand headquartered in Canada. While we don't have retail storefronts, our products are available on detailguardz.ca and Amazon.ca for fast Canadian shipping."
+      }
+    ]
+  },
+  {
+    icon: HelpCircle,
+    title: "Product Information",
+    questions: [
+      {
+        question: "Are DETAIL GUARDZ products compatible with Canadian tap water?",
+        answer: "Yes. All Dirt Lock products work with standard tap water regardless of water hardness or mineral content. The Venturi filtration system traps physical debris — not mineral ions — so water quality doesn't affect performance."
+      },
+      {
+        question: "Can I use the Dirt Lock in winter or cold temperatures?",
+        answer: "The Dirt Lock is made from high-strength resin that is resistant to temperature fluctuations. However, avoid using in freezing conditions where water inside the bucket could ice up and crack the plastic components."
+      },
+      {
+        question: "Where can I find Canadian tutorials and usage guides?",
+        answer: "Visit our YouTube channel and the product video section on each product detail page. DETAIL GUARDZ also posts Canadian-specific detailing tips on social media @detailguardz."
+      }
+    ]
+  }
+];
+
+// ─── Shared Component ──────────────────────────────────────────────────────────
+function FAQItem({ question, answer, isOpen, onClick }: {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onClick: () => void;
+}) {
   return (
-    <div className="border border-border rounded-lg overflow-hidden bg-background transition-all duration-200 hover:shadow-soft">
+    <div className="border border-border rounded-lg overflow-hidden bg-background transition-all duration-200 hover:shadow-md">
       <button
         onClick={onClick}
         className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 hover:bg-secondary/50 transition-colors"
       >
         <span className="font-semibold text-foreground pr-4">{question}</span>
         <ChevronDown
-          className={`h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
-            }`}
+          className={`h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96" : "max-h-0"
-          }`}
-      >
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96" : "max-h-0"}`}>
         <div className="px-6 pb-4 pt-2 text-muted-foreground leading-relaxed">
           {answer}
         </div>
@@ -186,29 +302,64 @@ function FAQItem({ question, answer, isOpen, onClick }) {
   );
 }
 
-export function FAQPage() {
-  const [openItems, setOpenItems] = useState({});
+// ─── Main Export ───────────────────────────────────────────────────────────────
+interface FAQPageProps {
+  region?: 'us' | 'ca';
+}
 
-  const toggleItem = (categoryIndex, questionIndex) => {
+export function FAQPage({ region = 'us' }: FAQPageProps) {
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+  const isCA = region === 'ca';
+  const faqCategories = isCA ? caFaqCategories : usFaqCategories;
+
+  const toggleItem = (categoryIndex: number, questionIndex: number) => {
     const key = `${categoryIndex}-${questionIndex}`;
-    setOpenItems((prev) => ({
-      ...prev,
-      [key]: !prev[key]
-    }));
+    setOpenItems(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
     <Layout>
       <div className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="bg-secondary py-12 lg:py-16">
+
+        {/* Hero */}
+        <section className={`py-14 lg:py-20 ${isCA ? 'bg-red-600' : 'bg-primary'}`}>
           <div className="container-wide">
             <div className="text-center max-w-3xl mx-auto px-4">
-              <h1 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
+              {/* Region Toggle */}
+              <div className="flex justify-center mb-8">
+                <div className="flex bg-white/15 backdrop-blur-sm rounded-full p-1 gap-1">
+                  <Link
+                    to="/faq"
+                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${!isCA
+                        ? 'bg-white text-primary shadow'
+                        : 'text-white hover:bg-white/20'
+                      }`}
+                  >
+                    🇺🇸 United States
+                  </Link>
+                  <Link
+                    to="/faq/ca"
+                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${isCA
+                        ? 'bg-white text-red-600 shadow'
+                        : 'text-white hover:bg-white/20'
+                      }`}
+                  >
+                    🇨🇦 Canada
+                  </Link>
+                </div>
+              </div>
+
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+                <MapPin className="h-3.5 w-3.5" />
+                {isCA ? 'Canadian Store — detailguardz.ca' : 'US Store — detailguardz.com'}
+              </div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
                 Frequently Asked Questions
               </h1>
-              <p className="text-muted-foreground text-base sm:text-lg">
-                Find answers to common questions about our products, shipping, returns, and more.
+              <p className="text-white/80 text-base sm:text-lg">
+                {isCA
+                  ? 'Find answers to common questions about ordering, shipping across Canada, returns, and pricing in CAD.'
+                  : 'Find answers to common questions about our products, US shipping, returns, and Amazon orders.'}
               </p>
             </div>
           </div>
@@ -221,8 +372,8 @@ export function FAQPage() {
               {faqCategories.map((category, categoryIndex) => (
                 <div key={category.title} className="scroll-mt-24">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <category.icon className="h-6 w-6 text-primary" />
+                    <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${isCA ? 'bg-red-100' : 'bg-primary/10'}`}>
+                      <category.icon className={`h-6 w-6 ${isCA ? 'text-red-600' : 'text-primary'}`} />
                     </div>
                     <h2 className="text-xl lg:text-3xl font-bold text-foreground">
                       {category.title}
@@ -234,7 +385,7 @@ export function FAQPage() {
                         key={questionIndex}
                         question={item.question}
                         answer={item.answer}
-                        isOpen={openItems[`${categoryIndex}-${questionIndex}`]}
+                        isOpen={!!openItems[`${categoryIndex}-${questionIndex}`]}
                         onClick={() => toggleItem(categoryIndex, questionIndex)}
                       />
                     ))}
@@ -245,7 +396,7 @@ export function FAQPage() {
           </div>
         </section>
 
-        {/* Still Have Questions Section */}
+        {/* Still Have Questions */}
         <section className="py-16 lg:py-24 bg-secondary">
           <div className="container-wide">
             <div className="max-w-4xl mx-auto">
@@ -254,87 +405,84 @@ export function FAQPage() {
                   Still Have Questions?
                 </h2>
                 <p className="text-muted-foreground text-lg">
-                  Can't find what you're looking for? Our customer service team is here to help.
+                  Can't find what you're looking for? Our {isCA ? 'Canadian' : 'US'} support team is here to help.
                 </p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
-                  <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                    <Mail className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="bg-background rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 group">
+                  <div className={`h-14 w-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-all duration-300 ${isCA ? 'bg-red-100 group-hover:bg-red-600' : 'bg-primary/10 group-hover:bg-primary'}`}>
+                    <Mail className={`h-7 w-7 transition-colors ${isCA ? 'text-red-600 group-hover:text-white' : 'text-primary group-hover:text-primary-foreground'}`} />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    Email Support
-                  </h3>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">Email Support</h3>
                   <p className="text-muted-foreground mb-4">
-                    Get detailed answers to your questions. We typically respond within 24 hours.
+                    Get detailed answers within 24 hours from our {isCA ? 'Canadian' : 'US'} support team.
                   </p>
                   <a
-                    href="mailto:support@detailguardz.com"
-                    className="text-primary font-medium hover:underline inline-flex items-center gap-2"
+                    href={isCA ? "mailto:support@detailguardz.ca" : "mailto:support@detailguardz.com"}
+                    className={`font-medium hover:underline inline-flex items-center gap-2 ${isCA ? 'text-red-600' : 'text-primary'}`}
                   >
-                    support@detailguardz.com
+                    {isCA ? 'support@detailguardz.ca' : 'support@detailguardz.com'}
                     <span>→</span>
                   </a>
                 </div>
 
-                <div className="bg-background rounded-xl p-8 shadow-soft hover:shadow-elevated transition-all duration-300 group">
-                  <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                    <MessageCircle className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="bg-background rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 group">
+                  <div className={`h-14 w-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-all duration-300 ${isCA ? 'bg-red-100 group-hover:bg-red-600' : 'bg-primary/10 group-hover:bg-primary'}`}>
+                    <MessageCircle className={`h-7 w-7 transition-colors ${isCA ? 'text-red-600 group-hover:text-white' : 'text-primary group-hover:text-primary-foreground'}`} />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    Live Chat
-                  </h3>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">Visit Our Store</h3>
                   <p className="text-muted-foreground mb-4">
-                    Chat with us in real-time for immediate assistance during business hours.
+                    Shop directly on our {isCA ? 'Canadian' : 'US'} website or Amazon {isCA ? '.ca' : 'storefront'}.
                   </p>
-                  <button className="text-primary font-medium hover:underline inline-flex items-center gap-2">
-                    Start a conversation
+                  <a
+                    href={isCA ? "https://www.detailguardz.ca/" : "https://www.amazon.com/stores/DETAILGUARDZ/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`font-medium hover:underline inline-flex items-center gap-2 ${isCA ? 'text-red-600' : 'text-primary'}`}
+                  >
+                    {isCA ? 'detailguardz.ca' : 'Shop on Amazon US'}
                     <span>→</span>
-                  </button>
+                  </a>
                 </div>
               </div>
 
               <div className="mt-8 text-center">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Business Hours:</strong> Monday - Friday: 9 AM - 6 PM EST | Saturday: 10 AM - 4 PM EST
+                  <strong>Business Hours:</strong> Monday–Friday: 9 AM–6 PM EST | Saturday: 10 AM–4 PM EST
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Quick Links Section */}
+        {/* Quick Links */}
         <section className="py-12 lg:py-16">
           <div className="container-wide">
-            <div className="bg-primary/5 rounded-xl p-8 border border-primary/20">
+            <div className={`rounded-xl p-8 border ${isCA ? 'bg-red-50 border-red-200' : 'bg-primary/5 border-primary/20'}`}>
               <h3 className="text-xl font-bold text-foreground mb-6 text-center">
                 Helpful Resources
               </h3>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/shipping-returns"
+                <Link
+                  to={isCA ? "/shipping/ca" : "/shipping"}
                   className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
                 >
                   Shipping & Returns
-                </a>
-                <a
-                  href="/terms"
-                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
-                >
-                  Terms of Service
-                </a>
-                <a
-                  href="/privacy"
-                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
-                >
-                  Privacy Policy
-                </a>
-                <a
-                  href="/contact"
-                  className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                </Link>
+                <Link
+                  to="/contact"
+                  className={`px-6 py-2 rounded-lg font-medium transition-colors text-white ${isCA ? 'bg-red-600 hover:bg-red-700' : 'bg-primary hover:bg-primary/90'}`}
                 >
                   Contact Us
+                </Link>
+                <a
+                  href={isCA ? "https://www.detailguardz.ca/" : "https://www.amazon.com/stores/DETAILGUARDZ/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 bg-background text-foreground rounded-lg font-medium hover:bg-secondary transition-colors border border-border"
+                >
+                  {isCA ? 'Shop detailguardz.ca' : 'Shop on Amazon'}
                 </a>
               </div>
             </div>

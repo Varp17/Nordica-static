@@ -11,8 +11,7 @@ const footerLinks = {
     { name: "About Us", href: "/about" },
     { name: "Where to Buy", href: "/where-to-buy" },
     { name: "Contact", href: "/contact" },
-    { name: "Canada Store", href: "/canada" },
-  ],
+    { name: "Canada Store", href: "https://www.detailguardz.ca/" },],
   support: [
     { name: "Shipping & Returns", href: "/shipping" },
     { name: "FAQ", href: "/faq" },
@@ -108,7 +107,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Contact</h3>
+            <h3 className="font-semibold text-lg mb-4">Contact us</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />

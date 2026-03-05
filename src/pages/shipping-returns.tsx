@@ -1,373 +1,414 @@
-import { Truck, Package, RefreshCw, Clock, MapPin, Phone, Mail, Shield, AlertCircle, ShoppingBag, CreditCard, Globe, Trash2 } from "lucide-react";
+import React from "react";
+import {
+    Truck, Package, RefreshCw, Clock, MapPin, Phone, Mail,
+    Shield, AlertCircle, Globe, CheckCircle2, XCircle,
+    CreditCard, ChevronRight, Info
+} from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
-const usShipping = {
-    region: "United States",
-    carrier: "Fulfilled via Amazon Multi-Channel Fulfilment",
-    processing: [
-        "Orders processed within 1–2 business days after payment confirmation.",
-        "Orders fulfilled through Amazon's national warehouse network.",
-        "Processing may be delayed during holidays, peak seasons, or promotional periods."
-    ],
-    timeframe: [
-        { label: "Standard Delivery", value: "3–7 business days" },
-        { label: "Expedited options", value: "1–3 business days (if available at checkout)" }
-    ],
-    notes: "Delivery timelines are estimates and not guaranteed."
-};
+interface ShippingReturnsPageProps {
+    region?: 'us' | 'ca';
+}
 
-const caShipping = {
-    region: "Canada",
-    carrier: "Fulfilled via Partnered Carriers",
-    processing: [
-        "Orders processed within 1–3 business days.",
-        "Shipments dispatched using major Canadian carriers (e.g., Canada Post, UPS, Purolator, etc.) or other logistics platforms."
-    ],
-    timeframe: [
-        { label: "Standard Delivery", value: "3–10 business days" },
-        { label: "Expedited options", value: "Available at checkout depending on postal code." }
-    ],
-    notes: "Rural and remote locations may require additional transit time."
-};
-
-const returnPolicyGeneral = [
-    "Return request must be submitted within 30 days of delivery",
-    "Item must be unused, in original packaging, and in resalable condition",
-    "Proof of purchase is required",
-    "Detailing liquids, chemicals, or opened consumables may not be eligible for return due to safety and resale regulations unless defective."
-];
-
-const nonReturnableItems = [
-    { icon: Trash2, label: "Opened detailing chemicals" },
-    { icon: Trash2, label: "Used microfiber products" },
-    { icon: Trash2, label: "Clearance or final sale items" },
-    { icon: Package, label: "Gift cards" }
-];
-
-export function ShippingReturnsPage() {
-    const [activeRegion, setActiveRegion] = useState<"US" | "Canada">("US");
+export function ShippingReturnsPage({ region = 'us' }: ShippingReturnsPageProps) {
+    const [activeTab, setActiveTab] = useState<'shipping' | 'returns'>('shipping');
+    const isCA = region === 'ca';
+    const accent = isCA ? 'red' : 'primary';
 
     return (
         <Layout>
-            <div className="min-h-screen bg-background pb-20">
-                {/* Hero Section */}
-                <section className="bg-secondary/30 border-b border-border py-16 lg:py-20">
-                    <div className="container-wide">
-                        <div className="text-center max-w-3xl mx-auto">
-                            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-                                Policy Update 2024
-                            </span>
-                            <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6">
-                                Shipping & Returns
-                            </h1>
-                            <p className="text-muted-foreground text-lg">
-                                Detail Guardz operates in both the United States and Canada.
-                                Please review the applicable section based on your shipping destination.
-                            </p>
+            <div className="min-h-screen bg-background">
+
+                {/* ── HERO ──────────────────────────────────────────────────────────── */}
+                <section className={`py-16 lg:py-20 ${isCA ? 'bg-red-600' : 'bg-primary'}`}>
+                    <div className="container-wide text-center max-w-3xl mx-auto px-4">
+
+                        {/* Region Toggle */}
+                        <div className="flex justify-center mb-8">
+                            <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-full p-1 gap-1">
+                                <Link
+                                    to="/shipping"
+                                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${!isCA ? 'bg-white text-primary shadow' : 'text-white hover:bg-white/20'
+                                        }`}
+                                >
+                                    🇺🇸 United States
+                                </Link>
+                                <Link
+                                    to="/shipping/ca"
+                                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${isCA ? 'bg-white text-red-600 shadow' : 'text-white hover:bg-white/20'
+                                        }`}
+                                >
+                                    🇨🇦 Canada
+                                </Link>
+                            </div>
+                        </div>
+
+                        <h1 className="text-4xl lg:text-5xl font-bold text-white mb-3">
+                            Shipping & Returns
+                        </h1>
+                        <p className="text-white/80 text-lg max-w-xl mx-auto">
+                            {isCA
+                                ? 'Everything you need to know about shipping to Canada and our return process.'
+                                : 'Everything you need to know about shipping to the US and our return process.'}
+                        </p>
+
+                        {/* Tab Switcher */}
+                        <div className="flex justify-center mt-8">
+                            <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-xl p-1 gap-1">
+                                <button
+                                    onClick={() => setActiveTab('shipping')}
+                                    className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${activeTab === 'shipping' ? 'bg-white text-primary shadow' : 'text-white hover:bg-white/20'
+                                        }`}
+                                >
+                                    <Truck className="h-4 w-4" /> Shipping
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('returns')}
+                                    className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${activeTab === 'returns' ? 'bg-white text-primary shadow' : 'text-white hover:bg-white/20'
+                                        }`}
+                                >
+                                    <RefreshCw className="h-4 w-4" /> Returns & Refunds
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Shipping Policy Section */}
-                <section className="py-20">
+                {/* ── QUICK STATS ───────────────────────────────────────────────────── */}
+                <div className="bg-background border-b border-border">
                     <div className="container-wide">
-                        <div className="flex items-center gap-3 mb-10">
-                            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                                <Truck className="h-6 w-6 text-primary" />
-                            </div>
-                            <h2 className="text-3xl font-bold tracking-tight">Shipping Policy</h2>
-                        </div>
-
-                        {/* Region Tabs */}
-                        <div className="flex p-1 bg-secondary rounded-xl w-fit mb-12">
-                            <button
-                                onClick={() => setActiveRegion("US")}
-                                className={cn(
-                                    "px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-                                    activeRegion === "US"
-                                        ? "bg-background text-foreground shadow-sm"
-                                        : "text-muted-foreground hover:text-foreground"
-                                )}
-                            >
-                                United States
-                            </button>
-                            <button
-                                onClick={() => setActiveRegion("Canada")}
-                                className={cn(
-                                    "px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-                                    activeRegion === "Canada"
-                                        ? "bg-background text-foreground shadow-sm"
-                                        : "text-muted-foreground hover:text-foreground"
-                                )}
-                            >
-                                Canada
-                            </button>
-                        </div>
-
-                        <div className="grid lg:grid-cols-12 gap-12">
-                            {/* Region Details */}
-                            <div className="lg:col-span-12">
-                                <div className="grid md:grid-cols-2 gap-8 bg-card rounded-2xl p-8 lg:p-10 border border-border shadow-soft">
-                                    <div>
-                                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                                            {activeRegion === "US" ? "🇺🇸 1. United States Orders" : "🇨🇦 2. Canada Orders"}
-                                        </h3>
-                                        <p className="inline-block px-3 py-1 rounded-full bg-secondary text-foreground text-sm font-medium mb-6">
-                                            {activeRegion === "US" ? usShipping.carrier : caShipping.carrier}
-                                        </p>
-
-                                        <div className="space-y-6">
-                                            <div>
-                                                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                                                    <Clock className="h-4 w-4 text-primary" /> Order Processing
-                                                </h4>
-                                                <ul className="space-y-2">
-                                                    {(activeRegion === "US" ? usShipping.processing : caShipping.processing).map((item, id) => (
-                                                        <li key={id} className="text-muted-foreground text-sm flex gap-2">
-                                                            <span className="text-primary mt-1">•</span> {item}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            <div>
-                                                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                                                    <Package className="h-4 w-4 text-primary" /> Shipping Timeframes
-                                                </h4>
-                                                <div className="space-y-3">
-                                                    {(activeRegion === "US" ? usShipping.timeframe : caShipping.timeframe).map((item, id) => (
-                                                        <div key={id} className="flex justify-between items-center p-3 rounded-lg bg-secondary/50 border border-border/50">
-                                                            <span className="text-sm font-medium">{item.label}</span>
-                                                            <span className="text-sm text-primary font-bold">{item.value}</span>
-                                                        </div>
-                                                    ))}
-                                                    <p className="text-xs text-muted-foreground italic mt-2">
-                                                        {activeRegion === "US" ? usShipping.notes : caShipping.notes}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-8">
-                                        {/* General Policies */}
-                                        <div className="grid gap-6">
-                                            <div className="p-5 rounded-xl border border-border bg-background">
-                                                <h4 className="font-bold flex items-center gap-2 mb-3">
-                                                    <MapPin className="h-4 w-4 text-primary" /> Tracking
-                                                </h4>
-                                                <p className="text-sm text-muted-foreground">
-                                                    {activeRegion === "US"
-                                                        ? "Tracking information will be emailed once the order ships. Tracking updates are managed through the assigned carrier (UPS, USPS, FedEx, etc.)."
-                                                        : "Tracking details will be provided via email once shipped. Delivery updates are managed directly by the assigned carrier."
-                                                    }
-                                                </p>
-                                            </div>
-
-                                            {activeRegion === "US" ? (
-                                                <div className="p-5 rounded-xl border border-border bg-background">
-                                                    <h4 className="font-bold flex items-center gap-2 mb-3 text-destructive">
-                                                        <AlertCircle className="h-4 w-4" /> Address Accuracy
-                                                    </h4>
-                                                    <p className="text-sm text-muted-foreground">
-                                                        Orders are shipped to the address entered at checkout. We cannot modify shipping addresses once the order has entered fulfilment.
-                                                    </p>
-                                                </div>
-                                            ) : (
-                                                <div className="p-5 rounded-xl border border-border bg-background">
-                                                    <h4 className="font-bold flex items-center gap-2 mb-3">
-                                                        <Globe className="h-4 w-4 text-primary" /> Customs & Duties
-                                                    </h4>
-                                                    <p className="text-sm text-muted-foreground">
-                                                        Orders shipped within Canada do not incur customs duties. Customers are responsible for any international charges if applicable.
-                                                    </p>
-                                                </div>
-                                            )}
-
-                                            <div className="p-5 rounded-xl border border-border bg-background">
-                                                <h4 className="font-bold flex items-center gap-2 mb-3">
-                                                    <Shield className="h-4 w-4 text-primary" /> Lost or Delayed Shipments
-                                                </h4>
-                                                <p className="text-sm text-muted-foreground">
-                                                    If tracking shows delivered but not received, contact carrier directly. If unresolved, contact support within 7 days of delivery date.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+                            {[
+                                { icon: Clock, label: 'Order Processing', value: isCA ? '1–3 business days' : '1–2 business days' },
+                                { icon: Truck, label: 'Standard Shipping', value: isCA ? '3–10 business days' : '3–7 business days' },
+                                { icon: RefreshCw, label: 'Return Window', value: '30 days' },
+                                { icon: CreditCard, label: 'Refund Time', value: isCA ? '5–10 business days' : '5–7 business days' },
+                            ].map(({ icon: Icon, label, value }) => (
+                                <div key={label} className="flex flex-col items-center py-5 px-4 text-center">
+                                    <Icon className={`h-5 w-5 mb-2 ${isCA ? 'text-red-600' : 'text-primary'}`} />
+                                    <p className="text-xs text-muted-foreground">{label}</p>
+                                    <p className="font-bold text-sm text-foreground mt-0.5">{value}</p>
                                 </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
-                </section>
+                </div>
 
-                {/* Returns & Refunds Section */}
-                <section className="py-20 bg-secondary/30 border-y border-border">
-                    <div className="container-wide">
-                        <div className="flex items-center gap-3 mb-10">
-                            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                                <RefreshCw className="h-6 w-6 text-primary" />
+                <div className="container-wide max-w-4xl py-14 px-4 space-y-10">
+
+                    {/* ══════════════════════════════════════════════════════════════════
+              SHIPPING TAB
+          ══════════════════════════════════════════════════════════════════ */}
+                    {activeTab === 'shipping' && (
+                        <div className="space-y-8">
+
+                            {/* Fulfilled By */}
+                            <InfoBanner isCA={isCA}>
+                                {isCA
+                                    ? '🇨🇦 Canadian orders are fulfilled via partnered carriers (Canada Post, UPS, Purolator, and others).'
+                                    : '🇺🇸 US orders are fulfilled via Amazon Multi-Channel Fulfilment through Amazon\'s national warehouse network.'}
+                            </InfoBanner>
+
+                            {/* Order Processing */}
+                            <SectionCard icon={Clock} title="Order Processing" isCA={isCA}>
+                                <ul className="space-y-2">
+                                    {(isCA ? [
+                                        'Orders are processed within 1–3 business days.',
+                                        'Shipments dispatched using major Canadian carriers (Canada Post, UPS, Purolator, etc.).',
+                                    ] : [
+                                        'Orders are processed within 1–2 business days after payment confirmation.',
+                                        'Fulfilled through Amazon\'s national warehouse network.',
+                                        'Processing may be delayed during holidays, peak seasons, or promotional periods.',
+                                    ]).map((item, i) => <Bullet key={i}>{item}</Bullet>)}
+                                </ul>
+                            </SectionCard>
+
+                            {/* Shipping Timeframes */}
+                            <SectionCard icon={Truck} title="Delivery Timeframes" isCA={isCA}>
+                                <div className="grid sm:grid-cols-2 gap-3 mb-3">
+                                    <TimeCard
+                                        isCA={isCA}
+                                        label="Standard Delivery"
+                                        value={isCA ? '3–10 business days' : '3–7 business days'}
+                                    />
+                                    <TimeCard
+                                        isCA={isCA}
+                                        label="Expedited (if available)"
+                                        value={isCA ? 'Available by postal code' : '1–3 business days'}
+                                    />
+                                </div>
+                                <Note>
+                                    {isCA
+                                        ? 'Rural and remote locations may require additional transit time.'
+                                        : 'Delivery timelines are estimates and not guaranteed.'}
+                                </Note>
+                            </SectionCard>
+
+                            {/* Tracking */}
+                            <SectionCard icon={MapPin} title="Tracking Your Order" isCA={isCA}>
+                                <ul className="space-y-2">
+                                    {(isCA ? [
+                                        'Tracking details will be provided via email once your order ships.',
+                                        'Delivery updates are managed directly by the assigned carrier.',
+                                    ] : [
+                                        'Tracking information will be emailed once the order ships.',
+                                        'Tracking updates are managed through the assigned carrier (UPS, USPS, FedEx, etc.).',
+                                    ]).map((item, i) => <Bullet key={i}>{item}</Bullet>)}
+                                </ul>
+                            </SectionCard>
+
+                            {/* Address / Customs */}
+                            <div className="grid sm:grid-cols-2 gap-6">
+                                <SectionCard icon={AlertCircle} title="Shipping Address" isCA={isCA} warning>
+                                    <ul className="space-y-2">
+                                        <Bullet>Orders are shipped to the address entered at checkout.</Bullet>
+                                        <Bullet>We cannot modify the address once the order has entered fulfilment.</Bullet>
+                                    </ul>
+                                </SectionCard>
+                                <SectionCard icon={Globe} title={isCA ? 'Customs & Duties' : 'Lost or Delayed Packages'} isCA={isCA}>
+                                    <ul className="space-y-2">
+                                        {(isCA ? [
+                                            'Orders shipped within Canada do not incur customs duties.',
+                                            'Customers are responsible for any future international charges if applicable.',
+                                        ] : [
+                                            'If tracking shows delivered but not received, contact the carrier first.',
+                                            'If unresolved, email our support team within 7 days of the marked delivery date.',
+                                        ]).map((item, i) => <Bullet key={i}>{item}</Bullet>)}
+                                    </ul>
+                                </SectionCard>
                             </div>
-                            <h2 className="text-3xl font-bold tracking-tight">Returns & Refunds</h2>
-                        </div>
 
-                        <div className="grid lg:grid-cols-2 gap-12">
-                            {/* Eligibility */}
-                            <div className="bg-card rounded-2xl p-8 lg:p-10 border border-border shadow-soft">
-                                <h3 className="text-2xl font-bold mb-6">General Eligibility</h3>
+                        </div>
+                    )}
+
+                    {/* ══════════════════════════════════════════════════════════════════
+              RETURNS TAB
+          ══════════════════════════════════════════════════════════════════ */}
+                    {activeTab === 'returns' && (
+                        <div className="space-y-8">
+
+                            {/* Eligibility Overview */}
+                            <SectionCard icon={Shield} title="General Return Eligibility  (US & Canada)" isCA={isCA}>
+                                <p className="text-sm text-muted-foreground mb-4">We accept returns under all of the following conditions:</p>
+                                <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                                    {[
+                                        'Submitted within 30 days of delivery',
+                                        'Item is unused and in original packaging',
+                                        'Item is in resalable condition',
+                                        'Proof of purchase provided',
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex items-center gap-2.5 p-3 rounded-lg bg-secondary/40 border border-border">
+                                            <CheckCircle2 className={`h-4 w-4 shrink-0 ${isCA ? 'text-red-600' : 'text-primary'}`} />
+                                            <span className="text-sm">{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <Note type="warning">
+                                    Opened detailing chemicals, liquids, or consumables may not be eligible for return unless defective.
+                                </Note>
+                            </SectionCard>
+
+                            {/* Region-specific returns */}
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <SectionCard icon={Package} title="🇺🇸 US Returns" isCA={isCA} highlight={!isCA}>
+                                    <ul className="space-y-2">
+                                        <Bullet>Initiate via customer support — return instructions provided once approved.</Bullet>
+                                        <Bullet>Customer covers return shipping unless item is damaged, wrong, or defective.</Bullet>
+                                        <Bullet><strong>Refund in 5–7 business days</strong> after inspection.</Bullet>
+                                        <Bullet>Original shipping fees are non-refundable unless our error.</Bullet>
+                                    </ul>
+                                </SectionCard>
+                                <SectionCard icon={Package} title="🇨🇦 Canada Returns" isCA={isCA} highlight={isCA}>
+                                    <ul className="space-y-2">
+                                        <Bullet>Return authorization required before shipping items back.</Bullet>
+                                        <Bullet>Customer covers return shipping unless item is defective or incorrect.</Bullet>
+                                        <Bullet><strong>Refund in 5–10 business days</strong> after inspection.</Bullet>
+                                        <Bullet>Shipping charges are non-refundable unless due to a fulfilment error.</Bullet>
+                                    </ul>
+                                </SectionCard>
+                            </div>
+
+                            {/* Non-Returnable */}
+                            <SectionCard icon={XCircle} title="Non-Returnable Items" isCA={isCA} danger>
+                                <p className="text-sm text-muted-foreground mb-4">The following are <strong>not eligible for return</strong> unless defective:</p>
+                                <div className="grid sm:grid-cols-2 gap-3">
+                                    {[
+                                        'Opened detailing chemicals',
+                                        'Used microfiber products',
+                                        'Clearance or final sale items',
+                                        'Gift cards',
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex items-center gap-2.5 p-3 rounded-lg bg-destructive/5 border border-destructive/20">
+                                            <XCircle className="h-4 w-4 text-destructive shrink-0" />
+                                            <span className="text-sm font-medium">{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </SectionCard>
+
+                            {/* Damaged Items — Step-by-step */}
+                            <SectionCard icon={AlertCircle} title="Received a Damaged or Incorrect Item?" isCA={isCA}>
+                                <p className="text-sm text-muted-foreground mb-5">Follow these 3 steps and we will make it right at no cost to you:</p>
                                 <div className="space-y-4">
-                                    {returnPolicyGeneral.map((item, id) => (
-                                        <div key={id} className="flex gap-4 items-start">
-                                            <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                                                <Shield className="h-3.5 w-3.5 text-primary" />
+                                    {[
+                                        { n: '1', title: 'Contact us within 5 days', body: 'Email support@detailguardz.com with your order number.' },
+                                        { n: '2', title: 'Send photos', body: 'Attach clear photos of the product and its packaging.' },
+                                        { n: '3', title: 'We arrange a resolution', body: 'Replacement or full refund — free of charge.' },
+                                    ].map(({ n, title, body }) => (
+                                        <div key={n} className="flex gap-4 items-start">
+                                            <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 text-white ${isCA ? 'bg-red-600' : 'bg-primary'}`}>{n}</div>
+                                            <div>
+                                                <p className="font-semibold text-foreground text-sm">{title}</p>
+                                                <p className="text-sm text-muted-foreground">{body}</p>
                                             </div>
-                                            <p className="text-muted-foreground">{item}</p>
                                         </div>
                                     ))}
-                                </div>
-                            </div>
-
-                            {/* Region Specific Returns */}
-                            <div className="grid gap-6">
-                                <div className="bg-background rounded-2xl p-6 border border-border">
-                                    <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                        🇺🇸 United States Returns
-                                    </h4>
-                                    <ul className="space-y-3 text-sm text-muted-foreground">
-                                        <li>• Initiate through customer support. Approved instructions provided.</li>
-                                        <li>• Customers cover return shipping unless damaged, incorrect, or defective.</li>
-                                        <li>• Refunds processed within 5–7 business days after inspection.</li>
-                                    </ul>
-                                </div>
-                                <div className="bg-background rounded-2xl p-6 border border-border">
-                                    <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                        🇨🇦 Canada Returns
-                                    </h4>
-                                    <ul className="space-y-3 text-sm text-muted-foreground">
-                                        <li>• Return authorization required before shipping back.</li>
-                                        <li>• Customers cover return shipping unless defective or incorrect.</li>
-                                        <li>• Refunds processed within 5–10 business days after inspection.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Non-Returnable & Damaged */}
-                        <div className="grid md:grid-cols-3 gap-8 mt-12">
-                            <div className="bg-destructive/5 rounded-2xl p-6 border border-destructive/20 md:col-span-2">
-                                <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-destructive">
-                                    <Trash2 className="h-5 w-5" /> Non-Returnable Items
-                                </h3>
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    {nonReturnableItems.map((item, id) => (
-                                        <div key={id} className="flex items-center gap-3 p-3 rounded-lg bg-background border border-destructive/10">
-                                            <item.icon className="h-4 w-4 text-destructive" />
-                                            <span className="text-sm font-medium">{item.label}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="bg-blue-500/5 rounded-2xl p-6 border border-blue-500/20">
-                                <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-blue-600">
-                                    <ShoppingBag className="h-5 w-5" /> Cancellations
-                                </h3>
-                                <p className="text-sm text-muted-foreground mb-4">
-                                    Orders may ONLY be cancelled before they enter fulfilment. Once fulfilled, cancellation is not possible.
-                                </p>
-                                <div className="p-3 rounded-lg bg-background border border-blue-500/10 text-xs text-muted-foreground italic">
-                                    You may initiate a return after delivery, if eligible.
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Damaged Items */}
-                        <div className="mt-8 bg-card rounded-2xl p-8 border border-border shadow-soft">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                                <div>
-                                    <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                        <AlertCircle className="h-5 w-5 text-primary" /> Damaged or Incorrect Items
-                                    </h3>
-                                    <p className="text-muted-foreground text-sm max-w-xl">
-                                        Contact us within 5 days of delivery. Provide order number and clear photos of the product and packaging.
-                                        We will arrange for replacement or refund at no additional cost.
-                                    </p>
                                 </div>
                                 <a
                                     href="mailto:support@detailguardz.com"
-                                    className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-bold text-center hover:bg-primary/90 transition-colors"
+                                    className={`mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-colors ${isCA ? 'bg-red-600 hover:bg-red-700' : 'bg-primary hover:bg-primary/90'}`}
                                 >
-                                    Report Issue
+                                    <Mail className="h-4 w-4" /> Report an Issue
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                            </SectionCard>
 
-                {/* Refund Processing Section */}
-                <section className="py-20 bg-background">
-                    <div className="container-wide">
-                        <div className="max-w-4xl mx-auto">
-                            <div className="grid md:grid-cols-2 gap-12 items-center">
-                                <div>
-                                    <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                                        <CreditCard className="h-6 w-6 text-primary" />
-                                    </div>
-                                    <h2 className="text-3xl font-bold mb-4">Refund Processing</h2>
-                                    <p className="text-muted-foreground mb-6">
-                                        Refunds are issued to the original payment method. Processing time may vary depending on your bank or credit card provider.
+                            {/* Cancellations */}
+                            <SectionCard icon={XCircle} title="Order Cancellations" isCA={isCA} warning>
+                                <ul className="space-y-2">
+                                    <Bullet>Orders may <strong>only be cancelled before</strong> they enter fulfilment.</Bullet>
+                                    <Bullet>Once fulfilled, cancellation is not possible.</Bullet>
+                                    <Bullet>You may initiate a return after delivery if eligible.</Bullet>
+                                </ul>
+                            </SectionCard>
+
+                            {/* Refund Processing */}
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <SectionCard icon={CreditCard} title="Refund Processing" isCA={isCA}>
+                                    <ul className="space-y-2">
+                                        <Bullet>Refunds are issued to the original payment method.</Bullet>
+                                        <Bullet>Allow up to 10 business days for funds to reflect in your account.</Bullet>
+                                        <Bullet>Processing time may vary by bank or card provider.</Bullet>
+                                    </ul>
+                                </SectionCard>
+                                <SectionCard icon={Globe} title="International Customers" isCA={isCA}>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                        Fulfilment is currently limited to the <strong className="text-foreground">United States and Canada</strong>. If international shipping becomes available, additional fees, customs duties, and import taxes will be the responsibility of the customer.
                                     </p>
-                                    <div className="flex items-center gap-2 p-4 rounded-xl bg-secondary/50 border border-border">
-                                        <Clock className="h-5 w-5 text-primary" />
-                                        <span className="font-bold">Up to 10 business days for funds to reflect.</span>
-                                    </div>
-                                </div>
-
-                                <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-                                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                                        <Globe className="h-5 w-5" /> International Customers
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        At this time, fulfilment is limited to the United States and Canada.
-                                        If international shipping becomes available, additional shipping fees, customs duties,
-                                        and import taxes will be the responsibility of the customer.
-                                    </p>
-                                </div>
+                                </SectionCard>
                             </div>
+
                         </div>
-                    </div>
-                </section>
+                    )}
+                </div>
 
-                {/* Contact CTA */}
-                <section className="container-wide mt-20">
-                    <div className="bg-primary rounded-[2.5rem] py-16 px-8 text-center text-primary-foreground relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl" />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full -ml-32 -mb-32 blur-3xl" />
-
-                        <div className="relative z-10 max-w-2xl mx-auto">
-                            <h2 className="text-3xl lg:text-4xl font-bold mb-6">Need further assistance?</h2>
-                            <p className="text-primary-foreground/80 mb-10 text-lg">
-                                Our support team is ready to help you with any questions regarding your order.
-                            </p>
-                            <div className="flex flex-wrap justify-center gap-4">
+                {/* ── Contact CTA ──────────────────────────────────────────────────── */}
+                <div className="container-wide px-4 pb-16">
+                    <div className={`rounded-3xl py-14 px-8 text-center text-white relative overflow-hidden ${isCA ? 'bg-red-600' : 'bg-primary'}`}>
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full -ml-32 -mb-32 blur-3xl pointer-events-none" />
+                        <div className="relative z-10 max-w-xl mx-auto">
+                            <h2 className="text-2xl lg:text-3xl font-bold mb-3">Still have questions?</h2>
+                            <p className="text-white/80 mb-7">Our support team is happy to help — usually within 24 hours.</p>
+                            <div className="flex flex-wrap justify-center gap-3">
                                 <a
-                                    href="mailto:support@detailguardz.com"
-                                    className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-white/90 transition-all flex items-center gap-2"
+                                    href={isCA ? "mailto:support@detailguardz.ca" : "mailto:support@detailguardz.com"}
+                                    className="px-6 py-3 bg-white text-primary rounded-xl font-bold hover:bg-white/90 transition-all flex items-center gap-2 text-sm"
                                 >
-                                    <Mail className="h-5 w-5" /> Email Support
+                                    <Mail className="h-4 w-4" />
+                                    {isCA ? 'support@detailguardz.ca' : 'support@detailguardz.com'}
                                 </a>
                                 <a
                                     href="tel:1-800-410-6311"
-                                    className="px-8 py-4 bg-primary-foreground/10 text-white border border-white/20 rounded-xl font-bold hover:bg-primary-foreground/20 transition-all flex items-center gap-2"
+                                    className="px-6 py-3 bg-white/10 border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center gap-2 text-sm"
                                 >
-                                    <Phone className="h-5 w-5" /> Call Us
+                                    <Phone className="h-4 w-4" /> Call Us
                                 </a>
                             </div>
+                            <p className="mt-5 text-white/60 text-xs">Mon–Fri 9 AM–6 PM EST &nbsp;|&nbsp; Sat 10 AM–4 PM EST</p>
                         </div>
                     </div>
-                </section>
+                </div>
+
             </div>
         </Layout>
+    );
+}
+
+// ── Reusable helpers ──────────────────────────────────────────────────────────
+
+function SectionCard({
+    icon: Icon, title, children, isCA = false,
+    warning = false, danger = false, highlight = false,
+}: {
+    icon: React.ElementType;
+    title: string;
+    children: React.ReactNode;
+    isCA?: boolean;
+    warning?: boolean;
+    danger?: boolean;
+    highlight?: boolean;
+}) {
+    const borderClass = danger
+        ? 'border-destructive/30 bg-destructive/5'
+        : warning
+            ? 'border-amber-300 bg-amber-50'
+            : highlight
+                ? isCA ? 'border-red-300 ring-1 ring-red-200 bg-card' : 'border-primary/30 ring-1 ring-primary/10 bg-card'
+                : 'border-border bg-card';
+
+    const iconColor = danger ? 'text-destructive' : warning ? 'text-amber-600' : isCA ? 'text-red-600' : 'text-primary';
+    const iconBg = danger ? 'bg-destructive/10' : warning ? 'bg-amber-100' : isCA ? 'bg-red-100' : 'bg-primary/10';
+
+    return (
+        <div className={`rounded-2xl border p-6 lg:p-8 shadow-sm ${borderClass}`}>
+            <div className="flex items-center gap-3 mb-5">
+                <div className={`h-9 w-9 rounded-lg flex items-center justify-center shrink-0 ${iconBg}`}>
+                    <Icon className={`h-5 w-5 ${iconColor}`} />
+                </div>
+                <h3 className="font-bold text-lg text-foreground">{title}</h3>
+            </div>
+            {children}
+        </div>
+    );
+}
+
+function InfoBanner({ children, isCA }: { children: React.ReactNode; isCA: boolean }) {
+    return (
+        <div className={`flex items-start gap-3 p-4 rounded-xl border text-sm ${isCA ? 'bg-red-50 border-red-200 text-red-800' : 'bg-blue-50 border-blue-200 text-blue-800'}`}>
+            <Info className="h-4 w-4 mt-0.5 shrink-0" />
+            <span>{children}</span>
+        </div>
+    );
+}
+
+function Bullet({ children }: { children: React.ReactNode }) {
+    return (
+        <li className="flex gap-2 items-start text-sm text-muted-foreground list-none">
+            <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+            <span>{children}</span>
+        </li>
+    );
+}
+
+function TimeCard({ label, value, isCA }: { label: string; value: string; isCA: boolean }) {
+    return (
+        <div className="flex flex-col items-center text-center p-4 rounded-xl bg-secondary/50 border border-border">
+            <p className="text-xs text-muted-foreground mb-1">{label}</p>
+            <p className={`font-bold text-base ${isCA ? 'text-red-600' : 'text-primary'}`}>{value}</p>
+        </div>
+    );
+}
+
+function Note({ children, type = 'info' }: { children: React.ReactNode; type?: 'info' | 'warning' }) {
+    const cls = type === 'warning'
+        ? 'bg-amber-50 border-amber-200 text-amber-800'
+        : 'bg-secondary/50 border-border text-muted-foreground';
+    return (
+        <div className={`flex items-start gap-2 p-3 rounded-lg border text-xs mt-2 ${cls}`}>
+            <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+            <span>{children}</span>
+        </div>
     );
 }

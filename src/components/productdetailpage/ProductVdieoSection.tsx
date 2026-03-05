@@ -1,7 +1,14 @@
 
 import React from 'react';
+import { Video } from '@/data/products';
 
-const ProductVideoSection = ({ 
+interface ProductVideoSectionProps {
+  productName?: string;
+  mainVideo?: Video;
+  additionalVideos?: Video[];
+}
+
+const ProductVideoSection = ({
   productName = "Product",
   mainVideo = {
     url: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1",
@@ -9,12 +16,12 @@ const ProductVideoSection = ({
     description: "Watch this detailed demonstration to see how the product works and learn professional installation tips."
   },
   additionalVideos = []
-}) => {
+}: ProductVideoSectionProps) => {
   return (
     <section>
       <div className="container mx-auto px-4 mt-8">
         <div className="max-w-6xl mx-auto">
-          
+
           {/* Section Title */}
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Product Video</h2>
 
@@ -36,7 +43,7 @@ const ProductVideoSection = ({
                 See {productName} in Action
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                {mainVideo.description}
+                {mainVideo.description ?? ''}
               </p>
             </div>
           </div>
@@ -45,7 +52,7 @@ const ProductVideoSection = ({
           {additionalVideos.length > 0 && (
             <div className="mt-8 grid md:grid-cols-3 gap-4">
               {additionalVideos.map((video, index) => (
-                <div 
+                <div
                   key={index}
                   className="bg-white border border-gray-200 rounded-lg overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow"
                 >
@@ -75,4 +82,4 @@ const ProductVideoSection = ({
       </div>
     </section>
   );
-};export default ProductVideoSection;
+}; export default ProductVideoSection;

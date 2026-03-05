@@ -3,7 +3,6 @@ import { Star, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCurrency } from '@/contexts/CurrencyContext';
-import { useCart } from '@/contexts/CartContext';
 import type { Product } from '@/data/products';
 
 interface ProductCardProps {
@@ -12,18 +11,6 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { formatPrice } = useCurrency();
-  const { addItem } = useCart();
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      category: product.category,
-    });
-  };
 
   return (
     <Link to={`/products/${product.slug}`} className="relative bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-elevated hover:border-primary/30 hover:-translate-y-1 hover:z-10 h-full flex flex-col group">
@@ -49,35 +36,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </Badge>
         )}
 
-        {/* Quick Add */}
+        {/* Quick Add / View Details Overlay */}
         <div
           className="
-    absolute inset-x-0 bottom-0 p-4
-    bg-gradient-to-t from-background/90 to-transparent
-
-    /* Mobile: always visible */
-    opacity-100 translate-y-0
-
-    /* Desktop: show on hover only */
-    lg:opacity-0 lg:translate-y-4
-    lg:group-hover:opacity-100 lg:group-hover:translate-y-0
-
-    transition-all duration-300
-  "
+            absolute inset-x-0 bottom-0 p-4
+            bg-gradient-to-t from-background/90 to-transparent
+            /* Mobile: always visible */
+            opacity-100 translate-y-0
+            /* Desktop: show on hover only */
+            lg:opacity-0 lg:translate-y-4
+            lg:group-hover:opacity-100 lg:group-hover:translate-y-0
+            transition-all duration-300
+          "
         >
           <Button
             className="w-full gradient-primary"
             size="sm"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Buy Now
+            View Details
           </Button>
           <p className="text-[10px] text-primary text-center mt-1.5 sm:mt-2 opacity-90 leading-tight">
             <span className="sm:hidden">View Details</span>
             <span className="hidden sm:inline">Click to view product</span>
           </p>
         </div>
-
       </div>
 
       {/* Content */}
