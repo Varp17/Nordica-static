@@ -30,7 +30,7 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background">
       <div className="container-wide py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-6">
@@ -89,10 +89,10 @@ export function Footer() {
           </div>
 
           {/* Company Links */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="font-semibold text-lg mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
+              {[...footerLinks.company, ...footerLinks.support.slice(0, 2)].map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
@@ -125,7 +125,7 @@ export function Footer() {
             © {new Date().getFullYear()} Detail Guardz. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            {footerLinks.support.slice(0, 2).map((link) => (
+            {footerLinks.support.slice(2).map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
