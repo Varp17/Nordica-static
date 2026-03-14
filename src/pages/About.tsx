@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Award, Users, MapPin, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
-import BG from "@/assets/new_bg.png"
+import BG from "@/assets/new_bg.webp"
 import BannerCarousel from "@/components/home/addcoroseul";
 
 

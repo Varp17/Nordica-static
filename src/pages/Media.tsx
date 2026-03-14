@@ -24,9 +24,16 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import BG from "@/assets/new_bg.png";
-import BG_MOBILE from "@/assets/new_bg_mobile.jpg";
+import BG from "@/assets/new_bg.webp";
+import BG_MOBILE from "@/assets/new_bg_mobile.webp";
 import PRODUCT_VIDEO from "@/assets/product-video.mp4";
+import INSTA_1 from "@/assets/insta 1.webp";
+import INSTA_2 from "@/assets/insta 2.webp";
+import INSTA_4 from "@/assets/insta 4.webp";
+import INSTA_12 from "@/assets/insta 12.webp";
+import INSTA_23 from "@/assets/insta 23.webp";
+import INSTA_1_2 from "@/assets/insta 1 2.webp";
+import INSTA_1_32 from "@/assets/insta 1 32.webp";
 
 const Media = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -70,13 +77,13 @@ const Media = () => {
     ];
 
     const instagramPosts = [
-        { url: "https://www.instagram.com/p/DVHHWoGDABP/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/642510782_18426941047136065_3636541372734329032_n.webp?stp=c230.0.691.691a_dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wzQYKRp8dCMQ7kNvwHe2pf8&_nc_oc=AdkHwSb1MIDw4SelTCZklrrazfZDid0d2PSWA84BMVTAUOM3a2hdMxKS7UPwkNOUpaojvcA1VjUHYk20MZGRYM6h&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=7gI_HCzquOS3vROdjaLRYw&_nc_ss=8&oh=00_Afy2mFl50Ul4wGDDeatzHJYn9wJluJMzvDBsJL0FhQzj2w&oe=69AE3FA4" },
-        { url: "https://www.instagram.com/p/DU6MhCrDG2f/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/633862104_18426338803136065_5302006944492113146_n.jpg?stp=c216.0.648.648a_dst-jpg_e35_s640x640_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0_xVybGdlbi5DMyJ9&_nc_ohc=ApcCjPISAFIQ7kNvwFx2e0k&_nc_oc=AdnC4VOsR5yKA_4_1baI8F7p_yVU8hgKKCqHc1z-aCrcDdXyWuaF3DremfxqOpEKrkxQAV1uU4zZFG2meN4dJZp0&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=EyQvGo1J7yExDrI_VTU4Vg&_nc_ss=8&oh=00_AfwRspIwBKe3MgSXYYasb3-BPoKEK6k_EunmZ_g-FEt9LA&oe=69AE1AEC" },
-        { url: "https://www.instagram.com/p/DUvhEtkDDuT/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/630706069_18425469181136065_7765785019909438115_n.jpg?stp=c216.0.648.648a_dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=rIWKyrh31lIQ7kNvwF9BAxr&_nc_oc=AdlI8ESculgq4SWNIUCdrB4tMpnWvVk9AehJog4L9PmFttyJR-IQIk-P2JQ8Y766XCk639mWWfB9fjKCWVVHqll4&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=Ck39bu9K4M05DAiw_WJGaw&_nc_ss=8&oh=00_AfyK1rvv1VThnY0DWbDCOou7zJaMBOU5PzHXxsoGUw5CA&oe=69AE43C2" },
-        { url: "https://www.instagram.com/p/DUdv7CajIna/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/627649098_18424178599136065_3585262081138649102_n.jpg?stp=c216.0.648.648a_dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=oyCRPx3pY5EQ7kNvwF7U-mP&_nc_oc=Adn5DScT9Y6oNQkZ6ggnZbcxDtLAd4JatKesRxr-dqurwni6TGneFPCaJwfcX3c_l7VGingW6rqG68QvNfxa-a6x&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=nQhRwIBtjerFcEis9-a8LQ&_nc_ss=8&oh=00_Afymj64tfDflchMG9rqU-oOpaGO2HF__Sgt3eBOpN-ufCQ&oe=69AE238D" },
-        { url: "https://www.instagram.com/p/DUTQHyMjNTh/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/627544187_18422851306136065_8148344715815464948_n.webp?stp=c288.0.864.864a_dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0_xVybGdlbi5DMyJ9&_nc_ohc=z542anmnRY0Q7kNvwFcvAbX&_nc_oc=AdliedkzXw0h0SteN1RicMgf6DCb2imRJ9QqP-aQxU6qtbWjJammnQcRiDTL03WgJBeP4Ck7QQaBpMdlO1fOZHQL&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=3OKiVMNW243BbtnqzBS2qQ&_nc_ss=8&oh=00_Afx-BZ6uazlV4_yx-DdCrFBs5dr5EVZI31XDONbNPdET8Q&oe=69AE3290" },
-        { url: "https://www.instagram.com/p/CkbOWg0rznW/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/621592531_18104629507696347_3721270434936701516_n.webp?stp=c288.0.864.864a_dst-jpg_e35_s640x640_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=azk_AcV8PK4Q7kNvwGG60vM&_nc_oc=AdkfzI4G8HWZAy2kKfy9Uksx6-kRneqzvOkqbN7E70a8xnJ8IbTE6ThOg0eFEy4oJx2mFij3K7KBTwSMr29ORk8-&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=wfoaUuWB-VbJpUjG4KTztQ&_nc_ss=8&oh=00_Afxnij7kwsKun2H6IzK15sNpg3e1t9DeSsIQqJ1BhCkHLQ&oe=69AE426A" },
-        { url: "https://www.instagram.com/p/DQxxNBgjPbV/", image: "https://scontent.cdninstagram.com/v/t51.82787-15/576038607_18408929257136065_8759206886452464043_n.webp?stp=c288.0.864.864a_dst-jpg_e35_s640x640_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9hmRo2UqRyIQ7kNvwFy0iXM&_nc_oc=AdkIQkAZTmWVyj4cdxOgHZ3is-Seejk8bC7jSd72TkJ0eEWnYcnZk9U3eOTnnfdnnBYmPspg40C52M9L4q9lY4Uj&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=7qV_1VHTu3thy2CsHhBaIA&_nc_ss=8&oh=00_Afzm15SKKU_UqJESxqjFexKBuy2l8-JUrf-mgn67TLhc5g&oe=69AE43C9" }
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_1 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_2 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_4 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_12 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_23 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_1_2 },
+        { url: "https://www.instagram.com/detailguardz/", image: INSTA_1_32 }
     ];
 
     const youtubeShorts = [

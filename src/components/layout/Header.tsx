@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import LOGO from "@/assets/logo.png"
+import LOGO from "@/assets/logo.webp"
 
 const navLinks = [
   { name: 'Home', href: '/' },
